@@ -1,0 +1,95 @@
+# OPTIONAL. Models reached through the OpenRouter API (pay per token; set OPENROUTER_API_KEY in .env).
+# The main data source of this project is models/subscriptions.yaml; use this file for model
+# families without a subscription route, or for a small harness comparison (API twins below).
+# No agent harness: each call is one system message + one user message.
+#
+# Each entry is one experimental condition; `id` is the label used in all results.
+# Model ids and hosts checked against https://openrouter.ai/models on 2026-10-06;
+# each run also records the dated `canonical_slug` OpenRouter reports for the model.
+#
+# provider.only pins the upstream host (and precision, via tags such as "deepinfra/fp8").
+# Without it the same model id may be served by different companies or quantisations
+# from one call to the next. require_parameters makes the call fail instead of silently
+# dropping a parameter the host does not support.
+#
+# Sampling: provider defaults are used (no temperature) because several models reject
+# temperature and the subscription routes cannot set it. See docs/METHODOLOGY.md.
+
+models:
+  # API twins of the subscription models: same model and effort, no agent harness.
+  # OpenRouter translates `reasoning.effort` for each vendor; check in the pilot that the
+  # reasoning tokens reported in `usage` are comparable to the subscription route's.
+  - id: claude-sonnet-5.5@openrouter
+    provider: openrouter
+    model: anthropic/claude-sonnet-5.5
+    params:
+      max_tokens: 16000
+      reasoning: {effort: medium}
+      provider: {only: [anthropic], require_parameters: true}
+
+  - id: claude-opus-5.5@openrouter
+    provider: openrouter
+    model: anthropic/claude-opus-5.5
+    params:
+      max_tokens: 16000
+      reasoning: {effort: medium}
+      provider: {only: [anthropic], require_parameters: true}
+
+  - id: gpt-6.1-sol@openrouter
+    provider: openrouter
+    model: openai/gpt-6.1-sol
+    params:
+      max_tokens: 16000
+      reasoning: {effort: medium}
+      provider: {only: [openai], require_parameters: true}
+
+  # Other families.
+  - id: gemini-3.8-flash@openrouter
+    provider: openrouter
+    model: google/gemini-3.8-flash
+    params:
+      max_tokens: 16000
+      provider: {only: [google-ai-studio], require_parameters: true}
+
+  - id: grok-4.7@openrouter
+    provider: openrouter
+    model: x-ai/grok-4.7
+    params:
+      max_tokens: 16000
+      provider: {only: [xai], require_parameters: true}
+
+  - id: qwen3.8-max@openrouter
+    provider: openrouter
+    model: qwen/qwen3.8-max-0902
+    params:
+      max_tokens: 16000
+      provider: {only: [alibaba], require_parameters: true}
+
+  - id: mistral-large-4@openrouter
+    provider: openrouter
+    model: mistralai/mistral-large-4-0
+    params:
+      max_tokens: 16000
+      provider: {only: [mistral], require_parameters: true}
+
+  # Open-weight models: served by third-party hosts, so pin host *and* precision.
+  - id: deepseek-v4-pro@openrouter
+    provider: openrouter
+    model: deepseek/deepseek-v4-pro
+    params:
+      max_tokens: 16000
+      provider: {only: [deepinfra/fp8], require_parameters: true}
+
+  - id: kimi-k3@openrouter
+    provider: openrouter
+    model: moonshotai/kimi-k3
+    params:
+      max_tokens: 16000
+      provider: {only: [moonshotai/mxfp4], require_parameters: true}
+
+  - id: gpt-oss-120b@openrouter
+    provider: openrouter
+    model: openai/gpt-oss-120b
+    params:
+      max_tokens: 16000
+      provider: {only: [deepinfra/bf16], require_parameters: true}

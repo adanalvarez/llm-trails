@@ -1,0 +1,19 @@
+# A study is the fixed set of stimuli shown to every model.
+# Changing any input file changes the inputs hash recorded in each run; bump `version` too.
+id: example
+title: "Example: next action proposed at an agent decision point"
+version: 0.1.0
+description: >
+  PLACEHOLDER showing the format. Each scenario describes a situation an LLM-based
+  agent could face and the tools it has, and asks for the single next action.
+  Replace the prompts and scenarios once the research topic is decided.
+
+system_prompt_file: prompts/system.md
+user_prompt_file: prompts/user.md
+scenarios_dir: scenarios
+
+repetitions: 5                # independent samples per scenario x model
+seed: 20261006                # fixes the shuffled call order
+timeout_s: 600                # per call
+max_attempts: 3               # retries for transient errors (network, 429, 5xx)
+max_consecutive_failures: 3   # a model's lane stops after this many failures in a row

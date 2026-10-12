@@ -1,0 +1,11 @@
+# Setup check: one trivial prompt per model, to verify credentials and routes work.
+# Not research data.
+id: smoke-test
+title: Setup check (one trivial prompt)
+version: 1.0.0
+system_prompt_file: prompts/system.md
+user_prompt_file: prompts/user.md
+repetitions: 1
+seed: 0
+timeout_s: 300
+max_attempts: 1

@@ -1,0 +1,32 @@
+# Additional model families via OpenRouter (pay-per-token; needs OPENROUTER_API_KEY in .env).
+# Clean API route: one system + one user message, no agent harness, no injected account email -
+# so these are directly comparable to each other and free of the subscription-route confounds.
+# Host+precision pinned for reproducibility (open-weight models are served by many hosts/quants).
+# IDs/hosts checked against https://openrouter.ai/models on 2026-10-11.
+models:
+  - id: grok-4.7@openrouter
+    provider: openrouter
+    model: x-ai/grok-4.7
+    max_concurrency: 5
+    params:
+      max_tokens: 16000
+      reasoning: {effort: medium}
+      provider: {only: [xai], require_parameters: true}
+
+  - id: deepseek-v4-pro@openrouter
+    provider: openrouter
+    model: deepseek/deepseek-v4-pro
+    max_concurrency: 5
+    params:
+      max_tokens: 16000
+      reasoning: {effort: medium}
+      provider: {only: [parasail/fp8], require_parameters: true}
+
+  - id: glm-5.3@openrouter
+    provider: openrouter
+    model: z-ai/glm-5.3
+    max_concurrency: 5
+    params:
+      max_tokens: 16000
+      reasoning: {effort: medium}
+      provider: {only: [sail-research/fp8, akashml/fp8, gmicloud/fp8], allow_fallbacks: true, require_parameters: true}

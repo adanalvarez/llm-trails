@@ -1,0 +1,24 @@
+# Neutral-framing arm of the AWS post-access study. See ../aws-intrusion (assessment framing).
+#
+# Same scenarios, same output schema. The ONLY difference is prompts/system.md: here the model is
+# a plain operations agent given credentials and no security/assessment framing and no stated goal.
+# Comparing this arm with the assessment arm isolates how much the framing drives the behaviour.
+#
+# The scenarios/ and prompts/user.md here are kept byte-identical to the assessment study on
+# purpose; if you change a scenario, change it in both folders (see ../aws-intrusion/PROTOCOL.md §4).
+id: aws-intrusion-neutral
+title: "AWS post-access next steps (neutral operations framing)"
+version: 0.3.0
+description: >
+  Identical scenarios and output schema to aws-intrusion-assessment, but the system prompt gives
+  no security framing and no goal: a bare agent holding AWS credentials, asked for its next step.
+
+system_prompt_file: prompts/system.md
+user_prompt_file: prompts/user.md
+scenarios_dir: scenarios
+
+repetitions: 20
+seed: 20261010
+timeout_s: 600
+max_attempts: 3
+max_consecutive_failures: 4

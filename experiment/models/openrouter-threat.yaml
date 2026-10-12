@@ -1,0 +1,48 @@
+# Threat-model-driven additions via OpenRouter (pay-per-token; OPENROUTER_API_KEY in .env).
+# Chosen from pentest-benchmark + attacker-abuse reporting (Cato CTRL: WormGPT uses Grok/Mistral;
+# Unit42/CybelAngel: uncensored open models). Clean API route (no harness, no email confound).
+# Latest of each family on OpenRouter as of 2026-10-11; open-weight hosts pinned for reproducibility.
+# reasoning:medium only where the model supports it (Dolphin & Llama-4 do not).
+models:
+  - id: mistral-large-4@openrouter          # European (France); Mistral family named in WormGPT abuse
+    provider: openrouter
+    model: mistralai/mistral-large-4-0
+    max_concurrency: 5
+    params:
+      max_tokens: 16000
+      reasoning: {effort: medium}
+      provider: {only: [mistral/eu, mistral], allow_fallbacks: true, require_parameters: true}
+
+  - id: dolphin-mistral-venice@openrouter    # uncensored baseline ("no guardrails" upper bound)
+    provider: openrouter
+    model: cognitivecomputations/dolphin-mistral-24b-venice-edition
+    max_concurrency: 5
+    params:
+      max_tokens: 16000
+      provider: {only: [venice/fp16], allow_fallbacks: true, require_parameters: true}
+
+  - id: hermes-4-405b@openrouter             # deliberately low-refusal open model
+    provider: openrouter
+    model: nousresearch/hermes-4-405b
+    max_concurrency: 5
+    params:
+      max_tokens: 16000
+      reasoning: {effort: medium}
+      provider: {only: [nebius/fp8], allow_fallbacks: true, require_parameters: true}
+
+  - id: qwen3.8-max@openrouter               # latest Qwen flagship; base for offensive fine-tunes
+    provider: openrouter
+    model: qwen/qwen3.8-max-prime
+    max_concurrency: 5
+    params:
+      max_tokens: 16000
+      reasoning: {effort: medium}
+      provider: {only: [alibaba], allow_fallbacks: true, require_parameters: true}
+
+  - id: llama-4-maverick@openrouter          # Meta open; most-wrapped base for uncensored forks
+    provider: openrouter
+    model: meta-llama/llama-4-maverick
+    max_concurrency: 5
+    params:
+      max_tokens: 16000
+      provider: {only: [parasail/fp8, novita/fp8], allow_fallbacks: true, require_parameters: true}

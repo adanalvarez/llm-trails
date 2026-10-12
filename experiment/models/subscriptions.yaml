@@ -1,0 +1,75 @@
+# Models reached through your own subscriptions (no per-token cost).
+#   claude_agent_sdk: Claude Pro/Max, through the Claude Agent SDK (Claude Code)  -> llmtrials login-claude
+#   codex_sdk:        ChatGPT plan, through the official Codex Python SDK          -> llmtrials login-codex
+#
+# Condition measured: "the model inside its vendor's agent harness, with tools disabled".
+# llmtrials strips each harness down as far as it allows; what remains is constant and recorded:
+#   Claude Code adds an identity line, environment, date, model name and your account email
+#     (captured per trial in meta.api_request, PII-redacted; `status` counts context variants);
+#   Codex adds only its code-mode tool schemas (~1.6k tokens; render check in the manifest).
+# Details: docs/METHODOLOGY.md.
+#
+# Design choices (keep them identical across models unless the study says otherwise):
+#   - same reasoning effort everywhere: medium. Harness defaults differ (Claude Code: medium;
+#     Codex: low for 6.1 Sol/Astra, medium for Luna), so effort is always set explicitly.
+#   - reasoning summaries recorded for qualitative analysis; they do not change the answer.
+#   - tiers paired across vendors: frontier / workhorse / fast.
+#
+# Usage limits: runs pause automatically when a limit is hit and continue after the reset.
+# ChatGPT Plus allows few messages per 5 h on frontier models (Astra ~5-45, 6.1 Sol ~15-160,
+# Luna ~350-3000; OpenAI docs, Oct 2026), so pilot with the fast tier.
+# Check logins, models and quota without running trials:  llmtrials check models/subscriptions.yaml
+
+models:
+  # --- frontier ---
+  - id: claude-opus-5.5@claude-sub
+    provider: claude_agent_sdk
+    model: claude-opus-5-5
+    params:
+      thinking: {type: adaptive, display: summarized}
+      effort: medium
+
+  - id: gpt-6-astra@chatgpt-sub
+    provider: codex_sdk
+    model: gpt-6-astra
+    params:
+      effort: medium
+      summary: auto
+
+  # --- workhorse ---
+  - id: claude-sonnet-5.5@claude-sub
+    provider: claude_agent_sdk
+    model: claude-sonnet-5-5
+    params:
+      thinking: {type: adaptive, display: summarized}
+      effort: medium
+
+  - id: gpt-6.1-sol@chatgpt-sub
+    provider: codex_sdk
+    model: gpt-6.1-sol
+    params:
+      effort: medium
+      summary: auto
+
+  # --- fast (light on quota: good for pilots) ---
+  - id: claude-haiku-4.5@claude-sub
+    provider: claude_agent_sdk
+    model: claude-haiku-4-5-20251001
+    params:
+      # Haiku 4.5 has no adaptive thinking or effort setting: a fixed thinking budget instead.
+      thinking: {type: enabled, budget_tokens: 8000, display: summarized}
+
+  - id: gpt-6-luna@chatgpt-sub
+    provider: codex_sdk
+    model: gpt-6-luna
+    params:
+      effort: medium
+      summary: auto
+
+  # Claude Fable 5.1 (above Opus) may also be available on your plan; check with the smoke test:
+  # - id: claude-fable-5.1@claude-sub
+  #   provider: claude_agent_sdk
+  #   model: claude-fable-5-1
+  #   params:
+  #     thinking: {type: adaptive, display: summarized}
+  #     effort: medium

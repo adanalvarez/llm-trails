@@ -1,0 +1,4 @@
+id: smoke-001
+title: Reply OK
+inputs:
+  instruction: Reply with exactly the word OK and nothing else.

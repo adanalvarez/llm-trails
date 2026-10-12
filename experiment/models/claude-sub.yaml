@@ -1,0 +1,36 @@
+# Claude models via your Claude Pro/Max subscription only (no Codex/ChatGPT login needed).
+# For the first test of the AWS study. Same settings as models/subscriptions.yaml.
+#   Setup once:  llmtrials login-claude     (do NOT set ANTHROPIC_API_KEY, or it bills the key)
+#   Check:       llmtrials check models/claude-sub.yaml
+#
+# fast tier (claude-haiku) is light on quota: use it to shake out the pipeline before the big models.
+
+models:
+  - id: claude-haiku-4.5@claude-sub
+    provider: claude_agent_sdk
+    model: claude-haiku-4-5-20251001
+    params:
+      thinking: {type: enabled, budget_tokens: 8000, display: summarized}
+
+  - id: claude-sonnet-5.5@claude-sub
+    provider: claude_agent_sdk
+    model: claude-sonnet-5-5
+    params:
+      thinking: {type: adaptive, display: summarized}
+      effort: medium
+
+  - id: claude-opus-5.5@claude-sub
+    provider: claude_agent_sdk
+    model: claude-opus-5-5
+    params:
+      thinking: {type: adaptive, display: summarized}
+      effort: medium
+
+  # Prior-gen Opus, used for the Opus tier because Opus 5.5 is blocked at the API (AUP) under
+  # the assessment framing. If 4.8 also blocks, that is recorded as a finding (lane auto-stops).
+  - id: claude-opus-4.8@claude-sub
+    provider: claude_agent_sdk
+    model: claude-opus-4-8
+    params:
+      thinking: {type: adaptive, display: summarized}
+      effort: medium

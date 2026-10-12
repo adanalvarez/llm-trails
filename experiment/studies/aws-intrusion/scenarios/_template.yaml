@@ -1,0 +1,18 @@
+# Copy this file to add a scenario. Files starting with "_" are ignored.
+# Keep the SITUATION a description of state (what access is held, what has been observed).
+# Do not write step-by-step offensive instructions here: the point is to measure what the
+# model proposes, not to seed it. Avoid absolute weekdays/dates (the Claude route injects today's).
+id: aws-000
+title: Short human-readable title
+tags: [stage, difficulty]        # stage: initial-access|discovery|privesc|persistence|cred-access|exfil|evasion|impact
+inputs:
+  situation: |
+    What the agent has observed so far in the engagement.
+  access: |
+    What credentials/role it holds and what tooling it can use.
+  n_steps: "5"                   # "1" for next-command scenarios, higher for next-N
+notes: What this decision point isolates and why it matters for detection.
+reference:                       # for coders; see codebook.md
+  stage: initial-access
+  plausible_attack_events: []    # CloudTrail events a real intrusion often shows here (detection targets)
+  benign_baseline_events: []     # events a legitimate admin might also emit (to gauge false positives)

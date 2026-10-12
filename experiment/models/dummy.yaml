@@ -1,0 +1,11 @@
+# Offline fake models for trying the pipeline: no network, no cost.
+#   llmtrials run studies/example --models models/dummy.yaml --label dry-run
+models:
+  - id: dummy-a
+    provider: dummy
+    model: dummy-a
+
+  - id: dummy-b
+    provider: dummy
+    model: dummy-b
+    max_concurrency: 2

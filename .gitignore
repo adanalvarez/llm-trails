@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+
+# Secrets
+.env
+
+# Run outputs: large and personal by default. To publish a finished run:
+#   git add -f experiment/runs/<study>/<run_id>
+experiment/runs/*
+!experiment/runs/.gitkeep
+
+# Local tool state (e.g. an isolated Codex home)
+.llmtrials/
+
+# Generated review artifacts (embed run data / reveal model identity) — regenerate with build_review.py
+experiment/studies/*/review/coding_tool.html
+experiment/studies/*/review/review_key.csv
+experiment/studies/*/review/human_coding.csv
+
+# Generated extraction/review artifacts (regenerate with extract_freetext.py / build_review.py).
+# recovered.csv IS committed — it is a pipeline input the loader reads.
+experiment/studies/*/review/freetext_extracted.jsonl
+experiment/studies/*/review/freetext_agree.csv
+experiment/studies/*/review/freetext_review.html

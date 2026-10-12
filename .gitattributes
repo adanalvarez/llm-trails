@@ -1,0 +1,2 @@
+# Same bytes on every OS, so input hashes match across machines.
+* text=auto eol=lf

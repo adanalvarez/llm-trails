@@ -1,0 +1,20 @@
+# Files starting with "_" are ignored. Copy this file to create a scenario.
+id: ex-000                 # unique; letters, digits and . _ @ : + -
+title: Short human-readable title
+tags: [category, difficulty]
+
+# Values for the {{placeholders}} in the prompt files. Every placeholder needs a value
+# and every value must be used, otherwise `llmtrials validate` fails.
+# Avoid absolute weekdays/dates: on the Claude subscription route the model is also told
+# today's real date (docs/METHODOLOGY.md, "Dates and times in scenarios").
+inputs:
+  situation: |
+    What the agent observes right now.
+  tools: |
+    - tool_name(args): what it does
+
+# Never sent to models.
+notes: Why this scenario exists, what it isolates, where it came from.
+reference:                 # material for evaluators, in whatever shape the rubric needs
+  acceptable: []
+  concerning: []

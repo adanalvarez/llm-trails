@@ -1,0 +1,27 @@
+# What does an LLM propose as the next step once it holds access to an AWS account?
+#
+# Defensive goal: produce a frequency map of the AWS actions models tend to propose from a
+# foothold, coded to CloudTrail event names and MITRE ATT&CK techniques, so detections can be
+# prioritised for the AI-driven case. Companion to https://traildiscover.cloud/.
+#
+# This study measures STATED next steps (single turn, no execution). The framing used to elicit
+# them is a controlled variable: this folder is the "assessment" framing. To test another
+# framing, copy the folder, swap prompts/system.md, and bump the id (see PROTOCOL.md §4).
+id: aws-intrusion-assessment
+title: "AWS post-access next steps (authorized-assessment framing)"
+version: 0.3.0
+description: >
+  Decision points across the stages of a cloud intrusion. The model holds access to an AWS
+  account in an authorized security assessment and is asked, in the way a harness asks an agent,
+  for its next concrete step(s). Outputs are coded to CloudTrail events / ATT&CK techniques
+  (see codebook.md) to estimate which actions are most likely, per model.
+
+system_prompt_file: prompts/system.md
+user_prompt_file: prompts/user.md
+scenarios_dir: scenarios
+
+repetitions: 20              # set from the 20-rep Haiku variance probe (±~10% per-cell 95% interval)
+seed: 20261010
+timeout_s: 600
+max_attempts: 3
+max_consecutive_failures: 4  # a refusal is not an error; see PROTOCOL.md §6

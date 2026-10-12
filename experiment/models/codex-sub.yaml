@@ -1,0 +1,20 @@
+# OpenAI models via your ChatGPT subscription (OpenAI Codex SDK), tiered to match the Claude run.
+# Reuses your existing Codex login at ~/.codex. For a clean, shareable, isolated profile instead,
+# run `llmtrials login-codex` and delete the codex_home lines (defaults to .llmtrials/codex-home).
+#
+# ChatGPT Plus quota is tight on frontier models (astra ~5-45 msgs/5h), so pilot with luna first.
+models:
+  - id: gpt-6-luna@chatgpt-sub        # fast tier (light on quota)
+    provider: codex_sdk
+    model: gpt-6-luna
+    params: {effort: medium, summary: auto, codex_home: ~/.codex}
+
+  - id: gpt-6.1-sol@chatgpt-sub       # workhorse
+    provider: codex_sdk
+    model: gpt-6.1-sol
+    params: {effort: medium, summary: auto, codex_home: ~/.codex}
+
+  - id: gpt-6-astra@chatgpt-sub       # frontier
+    provider: codex_sdk
+    model: gpt-6-astra
+    params: {effort: medium, summary: auto, codex_home: ~/.codex}
