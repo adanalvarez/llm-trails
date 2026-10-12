@@ -493,16 +493,6 @@ const FINDINGS=[
 const fg=$('#findgrid');
 FINDINGS.forEach(f=>{const b=el('button','find'); b.innerHTML=`<span class="find-h">${f.h}</span><span class="find-d">${f.d}</span><span class="find-go">See the data →</span>`; b.onclick=f.go; fg.appendChild(b);});
 
-/* ---- reference: situations + models ---- */
-const sitref=$('#sitref');
-DATA.scenarios.forEach(s=>{const row=el('div','refrow'); row.innerHTML=`<div class="refhd"><span class="refid">${s.id.toUpperCase()}</span><span class="reftitle">${s.label}</span><span class="reftag">offers ${TNAME[s.target]||s.target} · asks ${s.steps} step${s.steps>1?'s':''}</span></div><p class="refdesc">${s.desc}</p>`; sitref.appendChild(row);});
-const MODELS=[
-  {g:'Claude — consumer Max subscription (Claude Agent SDK)', rows:[['Haiku 4.5','Anthropic','claude-haiku-4-5'],['Sonnet 5.5','Anthropic','claude-sonnet-5-5'],['Opus 4.8','Anthropic','claude-opus-4-8 (stood in for Opus 5.5, blocked by the provider)']]},
-  {g:'GPT — ChatGPT subscription (OpenAI Codex SDK)', rows:[['GPT-6 Luna','OpenAI','gpt-6-luna'],['GPT-6.1 Sol','OpenAI','gpt-6.1-sol'],['GPT-6 Astra','OpenAI','gpt-6-astra']]},
-  {g:'OpenRouter — provider pinned', rows:[['Grok 4.7','xAI','x-ai/grok-4.7'],['DeepSeek V4','DeepSeek','deepseek/deepseek-v4-pro'],['GLM 5.3','Zhipu','z-ai/glm-5.3'],['Mistral L4','Mistral (EU)','mistralai/mistral-large-4-0'],['Dolphin (unc.)','Cognitive Computations','dolphin-mistral-24b-venice-edition (uncensored)'],['Hermes 4','Nous Research','nousresearch/hermes-4-405b'],['Qwen 3.8','Alibaba','qwen/qwen3.8-max-prime'],['Llama 4','Meta','meta-llama/llama-4-maverick']]},
-];
-const modref=$('#modref');
-MODELS.forEach(grp=>{modref.appendChild(el('div','mgrp',grp.g)); let t='<table class="mtbl"><thead><tr><th>model</th><th>vendor</th><th>id / route</th></tr></thead><tbody>'; grp.rows.forEach(r=>{t+=`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td><code>${r[2]}</code></td></tr>`;}); modref.appendChild(el('div',null,t+'</tbody></table>'));});
 
 /* ---- tabs ---- */
 const VIEWS=[['situation','By situation'],['matrix','Scenario × tactic'],['models','By model'],['diff','Model differences'],['explore','Event explorer'],['posture','Safety posture'],['persist','Persistence']];
@@ -769,6 +759,17 @@ const scenSel=$('#scenSel');
 DATA.scenarios.forEach(s=>{const o=el('option'); o.value=s.id; o.textContent=`${s.id.toUpperCase()}: ${s.label} · offers ${TNAME[s.target]}`; scenSel.appendChild(o);});
 scenSel.value='aws-02';
 scenSel.onchange=drill;
+
+/* ---- reference: situations + models ---- */
+const sitref=$('#sitref');
+DATA.scenarios.forEach(s=>{const row=el('div','refrow'); row.innerHTML=`<div class="refhd"><span class="refid">${s.id.toUpperCase()}</span><span class="reftitle">${s.label}</span><span class="reftag">offers ${TNAME[s.target]||s.target} · asks ${s.steps} step${s.steps>1?'s':''}</span></div><p class="refdesc">${s.desc}</p>`; sitref.appendChild(row);});
+const MODELS=[
+  {g:'Claude — consumer Max subscription (Claude Agent SDK)', rows:[['Haiku 4.5','Anthropic','claude-haiku-4-5'],['Sonnet 5.5','Anthropic','claude-sonnet-5-5'],['Opus 4.8','Anthropic','claude-opus-4-8 (stood in for Opus 5.5, blocked by the provider)']]},
+  {g:'GPT — ChatGPT subscription (OpenAI Codex SDK)', rows:[['GPT-6 Luna','OpenAI','gpt-6-luna'],['GPT-6.1 Sol','OpenAI','gpt-6.1-sol'],['GPT-6 Astra','OpenAI','gpt-6-astra']]},
+  {g:'OpenRouter — provider pinned', rows:[['Grok 4.7','xAI','x-ai/grok-4.7'],['DeepSeek V4','DeepSeek','deepseek/deepseek-v4-pro'],['GLM 5.3','Zhipu','z-ai/glm-5.3'],['Mistral L4','Mistral (EU)','mistralai/mistral-large-4-0'],['Dolphin (unc.)','Cognitive Computations','dolphin-mistral-24b-venice-edition (uncensored)'],['Hermes 4','Nous Research','nousresearch/hermes-4-405b'],['Qwen 3.8','Alibaba','qwen/qwen3.8-max-prime'],['Llama 4','Meta','meta-llama/llama-4-maverick']]},
+];
+const modref=$('#modref');
+MODELS.forEach(grp=>{modref.appendChild(el('div','mgrp',grp.g)); let t='<table class="mtbl"><thead><tr><th>model</th><th>vendor</th><th>id / route</th></tr></thead><tbody>'; grp.rows.forEach(r=>{t+=`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td><code>${r[2]}</code></td></tr>`;}); modref.appendChild(el('div',null,t+'</tbody></table>'));});
 
 renderHeat();
 }
