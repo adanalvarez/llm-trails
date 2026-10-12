@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Build the site page (repo-root index.html) that reads data/viz_data.json at runtime.
+"""Build the site page (website/index.html) that reads ../data/viz_data.json at runtime.
 
     python studies/aws-intrusion/viz_data.py        # refresh data/viz_data.json first
-    python studies/aws-intrusion/build_dashboard.py # -> repo-root index.html (the GitHub Pages site)
+    python studies/aws-intrusion/build_dashboard.py # -> ../website/index.html
 
 The page fetches the dataset on load, so adding new data updates the site with no rebuild.
 Re-run this only when the layout, copy, or styling changes. Every number is conditioned on its scenario.
@@ -795,7 +795,8 @@ renderHeat();
 
 
 def main():
-    out = HERE.parents[2] / "index.html"   # repo root = the GitHub Pages site (reads data/ as a sibling)
+    out = HERE.parents[2] / "website" / "index.html"   # the site folder (reads ../data/ as a sibling)
+    out.parent.mkdir(exist_ok=True)
     out.write_text(TEMPLATE)
     print(f"wrote {out} ({len(TEMPLATE):,} bytes)")
 

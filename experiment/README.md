@@ -37,7 +37,7 @@ uv run llmtrials run studies/aws-intrusion --models models/openrouter.yaml --mod
 # 4. code + aggregate + build the dataset the site reads
 uv run python studies/aws-intrusion/aggregate.py          # cross-model tables (read-only)
 uv run python studies/aws-intrusion/viz_data.py           # writes ../data/viz_data.json
-uv run python studies/aws-intrusion/build_dashboard.py    # writes ../index.html (the Pages site)
+uv run python studies/aws-intrusion/build_dashboard.py    # writes ../website/index.html
 ```
 
 Add your own situations by dropping a YAML in `studies/aws-intrusion/scenarios/`, or point the same

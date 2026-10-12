@@ -7,13 +7,13 @@ goal is defensive: turn how models tend to respond into detection priorities.
 
 A companion to [traildiscover.cloud](https://traildiscover.cloud).
 
-## Layout
+## Three parts
 
-| Path | What's in it |
+| Folder | What's in it |
 |---|---|
-| [`index.html`](index.html) | The interactive dashboard, served as a GitHub Pages site. It fetches `data/viz_data.json` at load, so new data updates the site with no code change. |
-| [`data/`](data/) | The processed dataset the site reads (`viz_data.json`). Regenerated from runs by the experiment scripts. |
 | [`experiment/`](experiment/) | Run the test yourself: the `llmtrials` harness, the study (prompts, 13 situations, codebook), and the scripts that turn raw runs into the dataset. Start here to reproduce or extend. |
+| [`data/`](data/) | The processed dataset the site reads (`viz_data.json`). Regenerated from runs by the experiment scripts. |
+| [`website/`](website/) | The interactive dashboard. It fetches `data/` at load, so adding new data updates the site with no code change. |
 
 ## How it flows
 
@@ -24,7 +24,7 @@ experiment/  (run models, code answers, aggregate)
 data/viz_data.json
       │  fetched at runtime
       ▼
-index.html  (the dashboard / Pages site)
+website/index.html  (the dashboard)
 ```
 
 Run the study and rebuild the dataset from `experiment/` (see [experiment/README.md](experiment/README.md)).
@@ -32,13 +32,16 @@ Drop new data in `data/` and the site reflects it on next load.
 
 ## See it
 
-The site is the repo root, so GitHub Pages serves it from the branch root (same as TrailDiscover).
-Locally:
+Locally, serve the repo root and open the site:
 
 ```bash
 python -m http.server 8000
-# then open http://localhost:8000/
+# then open http://localhost:8000/website/
 ```
+
+On **GitHub Pages**, the workflow in `.github/workflows/pages.yml` publishes the `website/` folder with
+`data/` copied in alongside it. Enable it under **Settings → Pages → Build and deployment → Source:
+GitHub Actions**, and it deploys on every push to `main`.
 
 ## How to read the numbers
 
