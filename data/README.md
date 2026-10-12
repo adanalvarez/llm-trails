@@ -1,6 +1,6 @@
 # data
 
-The processed dataset the website reads. Regenerated from raw runs by the experiment scripts, so it is
+The processed dataset the site reads. Regenerated from raw runs by the experiment scripts, so it is
 safe to commit and share (no personal identifiers; every record is scrubbed upstream).
 
 ## Files

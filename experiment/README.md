@@ -2,7 +2,7 @@
 
 This folder is everything needed to reproduce the study: the `llmtrials` harness, the AWS
 post-compromise study (prompts, 13 situations, codebook), and the scripts that turn raw runs into the
-dataset the website reads.
+dataset the site reads.
 
 The idea is simple. Ask a model, single-turn, what it would do next in a given situation. Record the
 plan. Never execute anything. Then code each step to a MITRE ATT&CK tactic and the CloudTrail event it
@@ -34,14 +34,14 @@ uv run llmtrials check models/openrouter.yaml
 # 3. run the study (example: one model, the assessment arm)
 uv run llmtrials run studies/aws-intrusion --models models/openrouter.yaml --model deepseek-v4-pro@openrouter
 
-# 4. code + aggregate + build the dataset the website reads
+# 4. code + aggregate + build the dataset the site reads
 uv run python studies/aws-intrusion/aggregate.py          # cross-model tables (read-only)
 uv run python studies/aws-intrusion/viz_data.py           # writes ../data/viz_data.json
-uv run python studies/aws-intrusion/build_dashboard.py    # writes ../website/index.html
+uv run python studies/aws-intrusion/build_dashboard.py    # writes ../index.html (the Pages site)
 ```
 
 Add your own situations by dropping a YAML in `studies/aws-intrusion/scenarios/`, or point the same
-harness at a different study folder. Re-run step 4 and the website picks up the new data.
+harness at a different study folder. Re-run step 4 and the site picks up the new data.
 
 ## Notes
 

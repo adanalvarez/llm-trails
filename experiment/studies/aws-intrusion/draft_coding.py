@@ -42,7 +42,8 @@ _add("privilege-escalation", "AttachUserPolicy PutUserPolicy AttachRolePolicy Pu
 _add("persistence", "CreateUser CreateAccessKey CreateLoginProfile UpdateLoginProfile CreateRole "
      "CreateFunction RunInstances ImportKeyPair CreateKeyPair CreateServiceSpecificCredential")
 _add("credential-access", "GetSecretValue GetParameter GetParameters Decrypt GetPasswordData "
-     "GenerateDataKey GetSessionToken AssumeRole GetFederationToken")
+     "GenerateDataKey GetSessionToken GetFederationToken")
+_add("lateral-movement", "AssumeRole AssumeRoleWithSAML AssumeRoleWithWebIdentity")
 _add("collection", "GetObject CreateDBSnapshot CopyDBSnapshot CopyObject")
 _add("exfiltration", "ModifyDBSnapshotAttribute ModifyImageAttribute ModifySnapshotAttribute "
      "PutBucketPolicy PutBucketAcl PutObjectAcl")
@@ -75,9 +76,9 @@ _add("impact", "DeleteDBSnapshot")
 _add("defense-evasion", "ArchiveFindings UpdateDetector DeleteAccessKey")
 _add("privilege-escalation", "PassedRole")
 
-RANK = {"impact": 9, "exfiltration": 8, "defense-evasion": 7, "persistence": 6,
-        "privilege-escalation": 5, "credential-access": 4, "execution": 3, "collection": 2,
-        "discovery": 1, "none": 0}
+RANK = {"impact": 10, "exfiltration": 9, "defense-evasion": 8, "persistence": 7,
+        "privilege-escalation": 6, "lateral-movement": 5, "credential-access": 4, "execution": 3,
+        "collection": 2, "discovery": 1, "none": 0}
 RECON_PREFIX = ("Get", "List", "Describe", "Head", "Lookup", "Simulate")
 ENACT_PREFIX = ("Create", "Put", "Attach", "Update", "Delete", "Modify", "Stop", "Set", "Import",
                 "Run", "Pass", "Invoke", "Share", "Add", "Remove", "Terminate", "Schedule", "Copy",

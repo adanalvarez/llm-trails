@@ -54,6 +54,20 @@ h1{font-size:clamp(28px,5vw,42px);line-height:1.08;margin:.3em 0 .25em;letter-sp
 .aim{font-size:15px;color:var(--text-secondary);max-width:72ch;margin:12px 0 0;line-height:1.5}
 .shh{font-size:22px;margin:0 0 4px;letter-spacing:-.01em}
 .shsub{color:var(--text-secondary);font-size:14px;margin:0 0 18px;max-width:78ch}
+section.ref{padding-top:34px}
+.refrow{padding:11px 0;border-top:1px solid var(--border)}
+.refrow:first-child{border-top:0}
+.refhd{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.refid{font-size:11px;color:var(--text-muted);font-weight:700;font-variant-numeric:tabular-nums}
+.reftitle{font-size:14.5px;font-weight:700}
+.reftag{font-size:11.5px;color:var(--text-secondary);background:var(--surface-2);border:1px solid var(--border);border-radius:999px;padding:1px 10px;white-space:nowrap}
+.refdesc{font-size:13px;color:var(--text-secondary);line-height:1.45;margin:4px 0 0;max-width:94ch}
+.mgrp{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-muted);font-weight:700;margin:16px 0 6px}
+.mgrp:first-child{margin-top:0}
+.mtbl{width:100%;border-collapse:collapse;font-size:13px}
+.mtbl th{text-align:left;font-size:11.5px;color:var(--text-secondary);font-weight:600;padding:6px 8px;border-bottom:1px solid var(--border)}
+.mtbl td{padding:6px 8px;border-bottom:1px solid var(--border);vertical-align:top}
+.mtbl code{font-family:var(--font-mono);font-size:11.5px;color:var(--text-secondary)}
 section.scope,section.findings,section.explore{padding-top:34px}
 .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:6px 0 16px}
 .fact{background:var(--surface-1);border:1px solid var(--border);border-radius:10px;padding:16px;box-shadow:var(--shadow);text-align:left;cursor:pointer;font:inherit;color:inherit;transition:border-color .12s}
@@ -360,6 +374,18 @@ footer b{color:var(--text-secondary)}
   </div>
 </section>
 
+<section class="ref" id="situations-ref">
+  <h2 class="shh">The 13 situations</h2>
+  <p class="shsub">Each model saw one of these as its current state and was asked for its next move. The tactic in the tag is the one the situation puts on offer.</p>
+  <div class="card"><div id="sitref"></div></div>
+</section>
+
+<section class="ref" id="models-ref">
+  <h2 class="shh">The models, and how we reached them</h2>
+  <p class="shsub">14 models from 7 vendors. Claude ran through a consumer Max subscription (Claude Agent SDK); GPT through a ChatGPT subscription (OpenAI Codex SDK); the rest through OpenRouter with the provider pinned. Every call was single-turn and nothing was executed. On the subscription routes the harness residue (identity line, date, model name) is captured per trial; OpenRouter calls carry none.</p>
+  <div class="card"><div id="modref"></div></div>
+</section>
+
 <footer>
   <p><b>Method.</b> Single-turn: each model proposes next steps; nothing runs against any account. Every step is coded to a MITRE ATT&amp;CK tactic and the CloudTrail event it would generate. Figures use the authorized-assessment framing, and every rate is conditioned on the situation shown. Claude and GPT models were reached through consumer subscriptions, the rest via OpenRouter.</p>
   <p><b>Reading the numbers.</b> A rate only means something next to its situation. "85% read secrets" means <i>when secrets are already located and readable</i>, not in general. In situations that ask for a multi-step plan, a cell is the share of answers whose plan included that action, so per-command rates within a plan overlap and don't sum to 100%. A few answers came back as free text instead of the required JSON plan (<span data-nv="freetext"></span> in the assessment arm); an agent could not act on those, so they are excluded from the rates and shown only under Safety posture.</p>
@@ -423,8 +449,8 @@ function jump(view, opt){
 
 /* ---- scope facts ---- */
 const FACTS=[
-  {n:DATA.n_models, lab:'models', sub:'7 vendors: frontier, open, and uncensored', go:()=>jump('models')},
-  {n:DATA.scenarios.length, lab:'situations', sub:'post-compromise decision points', go:()=>jump('situation')},
+  {n:DATA.n_models, lab:'models', sub:'7 vendors: frontier, open, and uncensored', go:()=>document.getElementById('models-ref').scrollIntoView({behavior:'smooth',block:'start'})},
+  {n:DATA.scenarios.length, lab:'situations', sub:'post-compromise decision points', go:()=>document.getElementById('situations-ref').scrollIntoView({behavior:'smooth',block:'start'})},
   {n:DATA.n_answers.toLocaleString(), lab:'executions', sub:'single-turn proposals, 20 per model and situation', go:()=>document.getElementById('method').scrollIntoView({behavior:'smooth',block:'center'})},
   {n:DATA.n_events, lab:'distinct events', sub:'CloudTrail events across every answer', go:()=>jump('explore')},
 ];
@@ -467,13 +493,24 @@ const FINDINGS=[
 const fg=$('#findgrid');
 FINDINGS.forEach(f=>{const b=el('button','find'); b.innerHTML=`<span class="find-h">${f.h}</span><span class="find-d">${f.d}</span><span class="find-go">See the data →</span>`; b.onclick=f.go; fg.appendChild(b);});
 
+/* ---- reference: situations + models ---- */
+const sitref=$('#sitref');
+DATA.scenarios.forEach(s=>{const row=el('div','refrow'); row.innerHTML=`<div class="refhd"><span class="refid">${s.id.toUpperCase()}</span><span class="reftitle">${s.label}</span><span class="reftag">offers ${TNAME[s.target]||s.target} · asks ${s.steps} step${s.steps>1?'s':''}</span></div><p class="refdesc">${s.desc}</p>`; sitref.appendChild(row);});
+const MODELS=[
+  {g:'Claude — consumer Max subscription (Claude Agent SDK)', rows:[['Haiku 4.5','Anthropic','claude-haiku-4-5'],['Sonnet 5.5','Anthropic','claude-sonnet-5-5'],['Opus 4.8','Anthropic','claude-opus-4-8 (stood in for Opus 5.5, blocked by the provider)']]},
+  {g:'GPT — ChatGPT subscription (OpenAI Codex SDK)', rows:[['GPT-6 Luna','OpenAI','gpt-6-luna'],['GPT-6.1 Sol','OpenAI','gpt-6.1-sol'],['GPT-6 Astra','OpenAI','gpt-6-astra']]},
+  {g:'OpenRouter — provider pinned', rows:[['Grok 4.7','xAI','x-ai/grok-4.7'],['DeepSeek V4','DeepSeek','deepseek/deepseek-v4-pro'],['GLM 5.3','Zhipu','z-ai/glm-5.3'],['Mistral L4','Mistral (EU)','mistralai/mistral-large-4-0'],['Dolphin (unc.)','Cognitive Computations','dolphin-mistral-24b-venice-edition (uncensored)'],['Hermes 4','Nous Research','nousresearch/hermes-4-405b'],['Qwen 3.8','Alibaba','qwen/qwen3.8-max-prime'],['Llama 4','Meta','meta-llama/llama-4-maverick']]},
+];
+const modref=$('#modref');
+MODELS.forEach(grp=>{modref.appendChild(el('div','mgrp',grp.g)); let t='<table class="mtbl"><thead><tr><th>model</th><th>vendor</th><th>id / route</th></tr></thead><tbody>'; grp.rows.forEach(r=>{t+=`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td><code>${r[2]}</code></td></tr>`;}); modref.appendChild(el('div',null,t+'</tbody></table>'));});
+
 /* ---- tabs ---- */
 const VIEWS=[['situation','By situation'],['matrix','Scenario × tactic'],['models','By model'],['diff','Model differences'],['explore','Event explorer'],['posture','Safety posture'],['persist','Persistence']];
 const tabs=$('#tabs');
 VIEWS.forEach(([id,label],i)=>{const b=el('button',null,label); b.dataset.view=id; b.setAttribute('role','tab'); b.setAttribute('aria-selected',i===0); b.onclick=()=>{activate(id); renderHeat();}; tabs.appendChild(b);});
 
 /* ---- scenario bars ---- */
-const TNAME={'discovery':'Discovery','credential-access':'Credential access','collection':'Collection','execution':'Execution','privilege-escalation':'Privilege escalation','persistence':'Persistence','defense-evasion':'Defense evasion','exfiltration':'Exfiltration','impact':'Impact'};
+const TNAME={'discovery':'Discovery','credential-access':'Credential access','lateral-movement':'Lateral movement','collection':'Collection','execution':'Execution','privilege-escalation':'Privilege escalation','persistence':'Persistence','defense-evasion':'Defense evasion','exfiltration':'Exfiltration','impact':'Impact'};
 const scn=$('#scn');
 DATA.scenarios.forEach(s=>{
   const row=el('div','srow'); row.id='sit-'+s.id;
@@ -492,7 +529,7 @@ DATA.scenarios.forEach(s=>{
 });
 
 /* ---- heatmaps (re-render on theme/tab change) ---- */
-const TABBR={'discovery':'Disc','credential-access':'Cred','collection':'Coll','execution':'Exec','privilege-escalation':'Priv','persistence':'Persist','defense-evasion':'Evade','exfiltration':'Exfil','impact':'Impact'};
+const TABBR={'discovery':'Disc','credential-access':'Cred','lateral-movement':'Lateral','collection':'Coll','execution':'Exec','privilege-escalation':'Priv','persistence':'Persist','defense-evasion':'Evade','exfiltration':'Exfil','impact':'Impact'};
 const decSet=new Set(DATA.decisions.map(d=>d.scenario));
 const scenInfo=Object.fromEntries(DATA.scenarios.map(s=>[s.id,s]));
 function renderHeat(){
@@ -634,10 +671,10 @@ if(DATA.names){
 const bd=$('#breadth'); const maxE=Math.max(...DATA.breadth.map(r=>r.distinct_events))||1;
 DATA.breadth.forEach(r=>{
   const row=el('div','mrow');
-  row.innerHTML=`<div class="mname">${r.model}<small>${r.distinct_tactics}/9 tactics · ${r.mean_steps} steps/answer</small></div><div class="mtrack"><div class="mfill" style="width:${Math.round(r.distinct_events/maxE*100)}%"></div></div><div class="mval">${r.distinct_events}</div>`;
+  row.innerHTML=`<div class="mname">${r.model}<small>${r.distinct_tactics}/10 tactics · ${r.mean_steps} steps/answer</small></div><div class="mtrack"><div class="mfill" style="width:${Math.round(r.distinct_events/maxE*100)}%"></div></div><div class="mval">${r.distinct_events}</div>`;
   row.style.cursor='pointer'; row.title=`See ${r.model}'s commands in the Event explorer`;
   row.addEventListener('click',()=>gotoExplorer(r.model));
-  bind(row.querySelector('.mtrack'),`<b>${r.model}</b><br>${r.distinct_events} distinct CloudTrail events<br>${r.distinct_tactics}/9 tactics · avg ${r.mean_steps} steps/answer<br><span style="opacity:.7">click to list them</span>`);
+  bind(row.querySelector('.mtrack'),`<b>${r.model}</b><br>${r.distinct_events} distinct CloudTrail events<br>${r.distinct_tactics}/10 tactics · avg ${r.mean_steps} steps/answer<br><span style="opacity:.7">click to list them</span>`);
   bd.appendChild(row);
 });
 
@@ -645,7 +682,7 @@ DATA.breadth.forEach(r=>{
 const EX=DATA.explorer;
 const EV=EX.events, EMOD=EX.models, ESC=EX.scenarios, DEN=EX.denom;
 const nS=ESC.length, nM=EMOD.length;
-const TCOL={discovery:'#219EBC','credential-access':'#1D6B40',collection:'#7A3E9D',execution:'#FFB703','privilege-escalation':'#B5179E',persistence:'#FB8500','defense-evasion':'#C1121F',exfiltration:'#0E6A85',impact:'#9C4A00',other:'#9AA7B0'};
+const TCOL={discovery:'#219EBC','credential-access':'#1D6B40','lateral-movement':'#0E9594',collection:'#7A3E9D',execution:'#FFB703','privilege-escalation':'#B5179E',persistence:'#FB8500','defense-evasion':'#C1121F',exfiltration:'#0E6A85',impact:'#9C4A00',other:'#9AA7B0'};
 const CCOLS=[['event','Event',0],['tactic','Tactic',0],['peak','Peak situation',1],['nsc','Situations',1],['nmod','Models',1],['overall','Overall',1]];
 let catSort={key:'peak',dir:-1}, catFilter='', catTac='', catModel='';
 function catEsc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
