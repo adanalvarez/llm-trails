@@ -126,7 +126,7 @@ h2{font-size:21px;margin:0 0 6px;letter-spacing:-.01em}
 .sbar{position:relative;margin-bottom:8px}
 .track{position:relative;height:26px;background:var(--surface-2);border-radius:5px;overflow:hidden}
 .fill{position:absolute;left:0;top:0;bottom:0;background:var(--blue);border-radius:5px 2px 2px 5px}
-.ref{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--orange)}
+.refmark{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--orange)}
 .bval{position:absolute;top:50%;transform:translateY(-50%);font-size:12px;font-weight:700;color:#fff;left:8px;text-shadow:0 1px 2px rgba(0,0,0,.35)}
 .bval.out{color:var(--text-primary);left:auto;text-shadow:none}
 .chips{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
@@ -525,7 +525,7 @@ DATA.scenarios.forEach(s=>{
     +`<span class="stag">offers ${TNAME[s.target]} · asks ${s.steps} step${s.steps>1?'s':''}</span></div>`
     +`<p class="sdesc">${s.desc}</p>`
     +`<div class="sbar"><div class="track"><div class="fill" style="width:${s.target_rate}%"></div>`
-    +`<div class="ref" style="left:${s.refusal}%"></div>`
+    +`<div class="refmark" style="left:${s.refusal}%"></div>`
     +`<div class="bval ${out?'out':''}" style="${out?'left:calc('+s.target_rate+'% + 6px)':''}">${s.target_rate}%</div></div></div>`;
   bind(row.querySelector('.track'),`<b>${s.label}</b> (${s.id.toUpperCase()})<br>${s.target_rate}% proposed ${TNAME[s.target]} · ${s.refusal}% refused<br>n=${s.n} answers`);
   const chips=el('div','chips'); chips.innerHTML='<span class="clab">often watched:</span>';
