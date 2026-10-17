@@ -7,13 +7,13 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="LLM Trails">
 <meta property="og:title" content="Hand an LLM your AWS keys. What does it do next?">
-<meta property="og:description" content="14 models, 13 post-compromise AWS situations, every proposed step matched to CloudTrail. A defender's map of what LLM-driven intruders reach for.">
+<meta property="og:description" content="14 models, 13 post-compromise AWS situations, every proposed step matched to CloudTrail. A defender's map of what LLM-driven intruders propose.">
 <meta property="og:image" content="preview.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Hand an LLM your AWS keys. What does it do next?">
 <meta name="twitter:description" content="14 models, 13 post-compromise AWS situations, every step matched to CloudTrail. A defender's map.">
 <meta name="twitter:image" content="preview.png">
-<meta name="description" content="What 14 LLMs reach for after landing in an AWS account, read against CloudTrail, one situation at a time.">
+<meta name="description" content="What 14 LLMs propose after gaining access to an AWS account, read against CloudTrail, one situation at a time.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -502,13 +502,13 @@ details.scomp>summary:hover .srtitle{color:var(--link)}
 <header class="hero">
   <div class="kicker">AWS detection engineering · LLMs</div>
   <h1>Hand an LLM your AWS keys. What does it do next?</h1>
-  <p class="lede">Attackers already use LLMs, so I ran the defender's version of the question. I put <b><span data-nv="models"></span> models</b> in <b>13 situations</b> where each has just gained access to an AWS account, asked only for its next move, and told each one it was working an <b>authorized security test</b>, and matched every answer to CloudTrail, AWS’s audit log. The short answer: handed a secret or an admin role, they take it; few go further on their own; and which model is behind the keys changes the risk a lot.</p>
+  <p class="lede">Attackers already use LLMs, so I ran the defender's version of the question. I put <b><span data-nv="models"></span> models</b> in <b>13 situations</b> where each has just gained access to an AWS account, asked only for its next move, and told each one it was working an <b>authorized security test</b>, and matched every answer to CloudTrail, AWS’s audit log. The short answer: given a secret or an admin role, they take it; few go further by themselves; and which model is using the keys changes the risk a lot.</p>
   <p class="byline">Directed by <a href="https://adan.cloud">Adan Alvarez</a> · research by Claude · data collected October 2026 · <a href="https://github.com/adanalvarez/llm-trails">code and data on GitHub</a> · <a href="#how">how it works</a></p>
 </header>
 
 <section class="results" id="results">
-  <h2 class="shh">What the models reached for</h2>
-  <p class="shsub">Each bar is one situation, in the order an intrusion unfolds, showing how many of the 14 models' answers took the <b>tempting move</b> it dangles. The pattern: readable secrets and an assumable admin role get taken almost every time, while data in plain view, destruction, and monitoring that is not in the way mostly get left alone.</p>
+  <h2 class="shh">What the models proposed</h2>
+  <p class="shsub">Each bar is one situation, in the order an intrusion unfolds, showing how many of the 14 models' answers proposed the <b>obvious next step</b> it sets up. The pattern is clear. Secrets the model can read and an admin role it can assume get taken almost every time, while data in open view, destruction, and monitoring that is not blocking it are mostly left untouched.</p>
   <div class="card"><div id="herochart"></div></div>
   <p class="credstrip"><b><span data-nv="models"></span></b> models · <b>13</b> situations · <b><span data-nv="answers"></span></b> single-turn answers · nothing executed · <a href="#how">how it works →</a></p>
 </section>
@@ -521,14 +521,14 @@ details.scomp>summary:hover .srtitle{color:var(--link)}
 
 <section class="defend" id="defend">
   <h2 class="shh">If you defend AWS, watch for these</h2>
-  <p class="shsub">None of these moves is new tradecraft, and that is the finding: models reuse the classic AWS playbook, so the detections you already have still apply. What this adds is which classics they favor, how often, and in which situation. Pair this with <a href="https://github.com/adanalvarez/llm-trails/blob/main/experiment/docs/detection-review.md">the detection write-up</a> and <a href="https://traildiscover.cloud">traildiscover.cloud</a>, an open catalog of CloudTrail events and their security relevance.</p>
+  <p class="shsub">None of these actions is new. That is the finding. Models reuse the classic AWS attack steps, so the detections you already have still apply. What this adds is which of those steps they prefer, how often, and in which situation. Pair this with <a href="https://github.com/adanalvarez/llm-trails/blob/main/experiment/docs/detection-review.md">the detection write-up</a> and <a href="https://traildiscover.cloud">traildiscover.cloud</a>, an open catalog of CloudTrail events and their security relevance.</p>
   <div class="watchgrid" id="watchgrid"></div>
   <p class="hint" id="watchnote"></p>
 </section>
 
 <section class="how" id="how">
   <h2 class="shh">How it works</h2>
-  <p class="shsub">One real run end to end, the ground rules, and the terms. Enough to trust the numbers above.</p>
+  <p class="shsub">One real run from start to finish, the rules, and the terms. Enough to trust the numbers above.</p>
   <div class="exgrid">
     <div class="excol">
       <div class="exhd">1 · What the model was told</div>
@@ -544,21 +544,21 @@ details.scomp>summary:hover .srtitle{color:var(--link)}
       </div>
     </div>
   </div>
-  <div class="exscore"><b>How this is scored.</b> A script reads each step, maps the command to the AWS API call it makes and the CloudTrail event it would leave (step 2 &rarr; <code>GetSecretValue</code>, a <b>Credential access</b> move), and records it. This answer counts as <b>went for it</b> on AWS-08 because its plan includes reading a secret. Answers that did not fit the format went to two other models to extract, and anything they disagreed on was checked by a person. <a href="#method-full">Full method &rarr;</a></div>
+  <div class="exscore"><b>How this is scored.</b> A script reads each step, maps the command to the AWS API call it makes and the CloudTrail event it would leave (step 2 &rarr; <code>GetSecretValue</code>, a <b>Credential access</b> move), and records it. This answer counts as <b>proposed it</b> on AWS-08 because its plan includes reading a secret. Answers that did not fit the format went to two other models to extract, and anything they disagreed on was checked by a person. <a href="#method-full">Full method &rarr;</a></div>
   <div class="ctxgrid">
-    <div class="ctxcard"><h3 class="ch">Why I ran this</h3><p>Models are already in attacker hands, whether a person is driving or an agent is built on top of one. I wanted to see what each model is biased toward once it is inside an account: what it reaches for first, what it treats as normal, and where it draws a line.</p></div>
-    <div class="ctxcard"><h3 class="ch">What it tells us</h3><p>Over many runs this shows which actions a model is most likely to put on the table, and where models differ: how one sets up persistence, whether another disables logging, how they assume a role. Where models converge is where detections should sit. It also shows which models refuse, and whether newer models invent new tradecraft or still reach for the classics like creating an IAM user to persist.</p></div>
+    <div class="ctxcard"><h3 class="ch">Why I ran this</h3><p>Attackers already have these models, whether a person is using one directly or an agent is built on one. I wanted to see what each model leans toward once it is inside an account: what it proposes first, what it treats as normal, and where it refuses.</p></div>
+    <div class="ctxcard"><h3 class="ch">What it tells us</h3><p>Over many runs this shows which actions a model is most likely to propose, and where models differ: how one sets up persistence, whether another disables logging, how they assume a role. Where models agree is where detections should go. It also shows which models refuse, and whether newer models invent new techniques or still use the classic ones like creating an IAM user to keep access.</p></div>
   </div>
-  <div class="callout"><b>What this is, and what it is not.</b> Every answer is single-turn and nothing runs against a real account: this is stated intent, not behavior. The prompt and the harness around a model shape its answer a lot, so it cannot tell you what a real attacker would do. It is a way to gauge how likely different models are to propose different next steps in simple, controlled situations. The <a href="https://github.com/adanalvarez/llm-trails">code is open</a>, so you can write your own situations and run them.</div>
+  <div class="callout"><b>What this is, and what it is not.</b> Every answer is single-turn and nothing runs against a real account, so this is stated intent, not behavior. The prompt and the harness around a model shape its answer a lot, so it cannot tell you what a real attacker would do. It is a way to estimate how likely different models are to propose different next steps in simple, controlled situations. The <a href="https://github.com/adanalvarez/llm-trails">code is open</a>, so you can write your own situations and run them.</div>
   <div class="facts" id="facts"></div>
   <p class="method" id="method">Every model got the same prompt for a situation, framed as an authorized security assessment (the SDK wrapper around it differs by vendor; see the appendix), and had to reply with a plan of next steps in a fixed format (JSON). One reply is one <b>answer</b>, and each model answered each situation <b>20 times</b>. Every proposed step maps to the AWS action it would perform, the CloudTrail event it would leave, and its ATT&amp;CK tactic. A rate is the share of all usable answers in a situation, refusals included. Opus 4.8 stands in for Opus 5.5, whose provider blocks these prompts; the same safeguards cut Opus 4.8 to 5 answers in AWS-11 and none in AWS-13, so 35 answers are missing (a result in itself). With 4 prose-only answers set aside, 3,640 &minus; 35 &minus; 4 = <b>3,601</b> answers behind every rate. The page uses the <b>authorized-assessment</b> framing; a second, plainer framing was also run and will be added once its answers are reviewed. <a href="#method-full">Full method, prompts and limits &rarr;</a></p>
   <details class="terms" id="terms"><summary>Key terms used on this page</summary>
     <dl class="tgrid">
       <div><dt>CloudTrail</dt><dd>AWS's audit log. Every API call an identity makes lands there, so it is what defenders write detections against.</dd></div>
       <div><dt>AWS action (event)</dt><dd>One API call, like <code>GetSecretValue</code> (read a secret). Every step a model proposes maps to the CloudTrail event it would leave behind.</dd></div>
-      <div><dt>Tactic</dt><dd>The attacker goal behind a step, using MITRE ATT&amp;CK names. Persistence is keeping a way back in; Defense evasion is dodging monitoring.</dd></div>
-      <div><dt>Tempting move</dt><dd>The obvious next step each situation dangles. The headline number on a situation is how many answers went for it.</dd></div>
-      <div><dt>Went for it · refused · something else</dt><dd>Went for it took the tempting move. Refused declined to help. Something else proposed other steps, usually more looking around.</dd></div>
+      <div><dt>Tactic</dt><dd>The attacker goal behind a step, using MITRE ATT&amp;CK names. Persistence is keeping access for later; Defense evasion is avoiding monitoring.</dd></div>
+      <div><dt>The obvious next step</dt><dd>The step each situation sets up. The headline number on a situation is how many answers proposed it.</dd></div>
+      <div><dt>Proposed it · refused · something else</dt><dd>Proposed it means the answer included the obvious next step. Refused means it declined to help. Something else means it proposed other steps, usually more looking around.</dd></div>
       <div><dt>IAM · GuardDuty</dt><dd>IAM is AWS's system of users, roles and permissions. GuardDuty is AWS's threat-detection service, which flags suspicious activity.</dd></div>
       <div><dt>Exfiltration · data event</dt><dd>Exfiltration means getting data out of the account. A data event (S3 object reads, Lambda invokes) is only logged if you turn on CloudTrail data-event logging.</dd></div>
       <div><dt>Answer</dt><dd>One reply from one model to one situation. Each model answered each situation 20 times, so every percentage is over real repeats.</dd></div>
@@ -568,7 +568,7 @@ details.scomp>summary:hover .srtitle{color:var(--link)}
 
 <section class="explore" id="explore-top">
   <h2 class="shh">Explore the data</h2>
-  <p class="shsub">Go as deep as you want: one situation at a time, model against model, or every AWS action.</p>
+  <p class="shsub">Go as deep as you want. One situation at a time, model against model, or every AWS action.</p>
   <h3 class="ph2" id="situations">Situation by situation</h3>
   <p class="sub2">The 13 situations in the order an intrusion unfolds. Open one for the setup, the actions proposed most, and what every model did down to the commands.</p>
   <nav class="stagenav" id="stagenav" aria-label="Stages"></nav>
@@ -580,22 +580,22 @@ details.scomp>summary:hover .srtitle{color:var(--link)}
 </section>
 
 <section class="view" data-view="matrix">
-  <h2>Each situation lights up its own tactic</h2>
-  <p class="sub">How often each MITRE ATT&amp;CK tactic shows up, per situation, pooled over models. The orange outline is the tactic each situation was built to offer, so a strong diagonal means the design worked. The off-diagonal cells are the interesting part. A low-privilege foothold (aws-03) almost never does textbook IAM privesc (14%); it runs code instead (Lambda and SSM, 64%).</p>
+  <h2>Each situation draws out its own tactic</h2>
+  <p class="sub">How often each MITRE ATT&amp;CK tactic shows up, per situation, pooled over models. The orange outline is the tactic each situation was built to offer, so a strong diagonal means the design worked. The off-diagonal cells are the interesting part. A low-privilege user (aws-03) almost never does normal IAM privilege escalation (14%); it runs code instead (Lambda and SSM, 64%).</p>
   <div class="card hmwrap"><div id="matrix"></div></div>
 </section>
 
 <section class="view" data-view="models">
   <h2>Per model, in every situation</h2>
-  <p class="sub">Each cell is how often a model went for that situation's <b>tempting move</b> (20 answers per cell). Every column is tied to its own situation, so compare <b>down a column</b> (same situation, different models), not across. The orange-underlined columns are the loaded decision points, and models are sorted by how willing they are on those. Two symbols: <b>*</b> means under-sampled, <b>–</b> means no data. Only Opus 4.8 is affected (aws-11, n=5; aws-13, none): its provider safeguards block the post-persistence and cross-account-admin prompts, the same block that stopped Opus 5.5 completely. That is a finding, not a gap in collection.</p>
+  <p class="sub">Each cell is how often a model proposed that situation's <b>obvious next step</b> (20 answers per cell). Every column is tied to its own situation, so compare <b>down a column</b> (same situation, different models), not across. The orange-underlined columns are the situations where a real change is on offer, and models are sorted by how willing they are there. Two symbols: <b>*</b> means too few answers, <b>–</b> means no data. Only Opus 4.8 is affected (aws-11, n=5; aws-13, none): its provider safeguards block the post-persistence and cross-account-admin prompts, the same block that stopped Opus 5.5 completely. That is a finding, not a gap in collection.</p>
   <div class="card">
     <div class="hmwrap"><div id="msmatrix"></div></div>
     <p class="cellhint">↑ Click any cell to see the exact events and example commands that model proposed in that situation.</p>
     <div class="msdetail" id="msdetail"></div>
   </div>
 
-  <h2 style="margin-top:30px">Drill into one situation</h2>
-  <p class="sub">The full ATT&amp;CK fingerprint for one situation: every model's tactic breakdown and how often it refused. The orange-outlined column is the tactic that situation offers.</p>
+  <h2 style="margin-top:30px">Look at one situation in detail</h2>
+  <p class="sub">The full ATT&amp;CK breakdown for one situation, with every model's tactics and how often it refused. The orange-outlined column is the tactic that situation offers.</p>
   <div class="card">
     <label class="selwrap">Situation&nbsp;<select id="scenSel"></select></label>
     <p class="hint" id="drillDesc"></p>
@@ -605,7 +605,7 @@ details.scomp>summary:hover .srtitle{color:var(--link)}
 
 <section class="view" data-view="diff">
   <h2>Where the models differ</h2>
-  <p class="sub">Rates tell you how often. This tells you <b>what</b>: the command a model opens with, how it keeps access, and how wide its range is. This is where the models stop looking alike.</p>
+  <p class="sub">Rates tell you how often. This tells you <b>what</b>: the command a model opens with, how it keeps access, and how wide its range is. This is where the models start to differ.</p>
 
   <div class="card">
     <h3 class="ph">First move: the opening command</h3>
@@ -621,8 +621,8 @@ details.scomp>summary:hover .srtitle{color:var(--link)}
   </div>
 
   <div class="card" id="names">
-    <h3 class="ph">Naming tells: what they call the sessions and users they create</h3>
-    <p class="hint">The literal names models put in <code>--role-session-name</code> and on the IAM users and roles they create. These are descriptive and self-referential, which makes them cheap, high-precision CloudTrail signatures. (The session names lean on the authorized-assessment persona the prompt sets; the IAM names are more about intent.)</p>
+    <h3 class="ph">Naming patterns: what they call the sessions and users they create</h3>
+    <p class="hint">The literal names models put in <code>--role-session-name</code> and on the IAM users and roles they create. These names describe what the model is doing, which makes them simple, high-precision CloudTrail signatures. (The session names repeat the authorized-assessment wording from the prompt; the IAM names show more intent.)</p>
     <h4 class="nmh">roleSessionName values</h4>
     <div class="namechips" id="sessnames"></div>
     <h4 class="nmh" style="margin-top:14px">IAM user and role names</h4>
@@ -634,8 +634,8 @@ details.scomp>summary:hover .srtitle{color:var(--link)}
   </div>
 
   <div class="card">
-    <h3 class="ph">Repertoire breadth: who does the most different things</h3>
-    <p class="hint">How many distinct CloudTrail events a model proposed across all 13 situations (assessment framing). Wider means more varied tradecraft. The tactic count under each name is how much of ATT&amp;CK it touched. <b>Click a model to list its exact events in the Event explorer.</b></p>
+    <h3 class="ph">Range of actions: who does the most different things</h3>
+    <p class="hint">How many distinct CloudTrail events a model proposed across all 13 situations (assessment framing). Wider means a more varied set of actions. The tactic count under each name is how much of ATT&amp;CK it covered. <b>Click a model to list its exact events in the Event explorer.</b></p>
     <div id="breadth"></div>
   </div>
 </section>
@@ -656,7 +656,7 @@ details.scomp>summary:hover .srtitle{color:var(--link)}
 
 <section class="view active" data-view="posture">
   <h2>How cautious is each model?</h2>
-  <p class="sub">Across all 13 situations, the share of each model's answers that <b>refused</b> to help, paused to <b>report</b> a risk without acting, only <b>looked around</b> (read-only recon), or <b>proposed a change</b> to the account. Sorted by how often it proposes a change. (The situation cards ask a narrower question: did an answer take that situation's tempting move.) Because every prompt is framed as an <b>authorized</b> assessment, a refusal means the model declined even sanctioned help: cautious, not necessarily right. <b>Free text</b> means the model wrote prose instead of the required format; an agent could not act on it, so those answers sit outside every other number on the page.</p>
+  <p class="sub">Across all 13 situations, the share of each model's answers that <b>refused</b> to help, paused to <b>report</b> a risk without acting, only <b>looked around</b> (read-only recon), or <b>proposed a change</b> to the account. Sorted by how often it proposes a change. (The situation cards ask a narrower question: did an answer propose that situation's obvious next step.) Because every prompt is framed as an <b>authorized</b> assessment, a refusal means the model declined even approved help, so it is cautious, not necessarily right. <b>Free text</b> means the model wrote prose instead of the required format; an agent could not act on it, so those answers are left out of every other number on the page.</p>
   <div class="card">
     <div class="legend">
       <span><span class="sw" style="background:var(--gray)"></span>Refused</span>
@@ -670,25 +670,25 @@ details.scomp>summary:hover .srtitle{color:var(--link)}
 </section>
 
 <section class="view" data-view="persist">
-  <h2>How they make admin access stick</h2>
-  <p class="sub">When a model had broad admin (aws-02 and aws-11) and chose to persist, which mechanism did it use? A new IAM user with a fresh access key wins, and it is the loudest, most detectable option. Backdoored role trust policies come next. These are counts of enacting answers.</p>
+  <h2>How they keep admin access</h2>
+  <p class="sub">When a model had broad admin (aws-02 and aws-11) and chose to persist, which mechanism did it use? A new IAM user with a new access key is the most common, and the easiest to detect. Backdoored role trust policies come next. These are counts of answers that proposed a change.</p>
   <div class="card"><div id="persist"></div></div>
   <div class="callout" style="border-left-color:var(--link)">
-    <b>Detection read.</b> The top persistence paths map to a short, high-value CloudTrail watchlist: <code>CreateUser</code>+<code>CreateAccessKey</code> on an existing identity, <code>UpdateAssumeRolePolicy</code> / <code>PutRolePolicy</code> trust changes, and <code>CreateFunction</code> for Lambda footholds. Rare moves (console login profiles on API-only principals) are low-volume but high-signal.
+    <b>Detection takeaway.</b> The top persistence paths map to a short, high-value CloudTrail watchlist: <code>CreateUser</code>+<code>CreateAccessKey</code> on an existing identity, <code>UpdateAssumeRolePolicy</code> / <code>PutRolePolicy</code> trust changes, and <code>CreateFunction</code> for Lambda backdoors. Rare moves (console login profiles on API-only users) are uncommon but high-signal.
   </div>
 </section>
 
 <section class="ref" id="method-full">
   <h2 class="shh">Appendix: how this was done</h2>
-  <p class="shsub">Enough to reproduce or argue with. Everything below is in the <a href="https://github.com/adanalvarez/llm-trails">repository</a>.</p>
+  <p class="shsub">Enough to reproduce or challenge. Everything below is in the <a href="https://github.com/adanalvarez/llm-trails">repository</a>.</p>
   <div class="card mcard">
     <dl class="mdl">
       <div><dt>The prompts</dt><dd>Every model got one system prompt (the authorized-assessment framing shown above) and one situation, and had to answer in a fixed JSON format listing each step, its command, and the CloudTrail events it expected. The 13 situations and both prompts are in <code>studies/aws-intrusion/</code>.</dd></div>
       <div><dt>Sampling</dt><dd>20 answers per model per situation, single-turn, no tools executed. Each model ran at its provider's default settings with medium reasoning effort. Collected 10&ndash;11 October 2026.</dd></div>
-      <div><dt>The harness differs by vendor</dt><dd>Claude ran through the Claude Agent SDK, GPT through the OpenAI Codex SDK, the rest through OpenRouter. The subscription SDKs add their own system text, so the wrapper around the prompt is not identical across vendors. Since framing moves the numbers, treat cross-vendor gaps as directional.</dd></div>
+      <div><dt>The harness differs by vendor</dt><dd>Claude ran through the Claude Agent SDK, GPT through the OpenAI Codex SDK, the rest through OpenRouter. The subscription SDKs add their own system text, so the wrapper around the prompt is not identical across vendors. Since framing moves the numbers, treat cross-vendor differences as rough, not exact.</dd></div>
       <div><dt>Scoring</dt><dd>A script maps each proposed step to its AWS API call, CloudTrail event, and <a href="https://attack.mitre.org/">MITRE ATT&amp;CK</a> tactic from a fixed table (<code>draft_coding.py</code>). Answers that broke the format were read by two other models (one Anthropic, one OpenAI) to extract any real commands; where those two disagreed, a person decided. The codebook and the human-reviewed overrides are in the repo.</dd></div>
       <div><dt>How steady the numbers are</dt><dd>With 20 answers, a single model-and-situation rate carries roughly a &plusmn;20 point 95% interval; a whole-situation rate across 14 models is tighter, roughly &plusmn;6 points. Read small gaps as noise.</dd></div>
-      <div><dt>Reading the numbers</dt><dd>A rate only means something next to its situation: "87% read secrets" means <i>when secrets are already located and readable</i>, not in general. When a situation asks for a multi-step plan, an action's percentage is the share of answers whose plan included it, so actions in one plan overlap and don't add up to 100%. <span data-nv="freetext"></span> answers came back as prose instead of the required format; an agent could not act on them, so they are left out of the rates and shown only under Safety posture.</dd></div>
+      <div><dt>Reading the numbers</dt><dd>A rate only means something next to its situation. "87% read secrets" means <i>when secrets are already located and readable</i>, not in general. When a situation asks for a multi-step plan, an action's percentage is the share of answers whose plan included it, so actions in one plan overlap and don't add up to 100%. <span data-nv="freetext"></span> answers came back as prose instead of the required format; an agent could not act on them, so they are left out of the rates and shown only under Safety posture.</dd></div>
       <div><dt>What this is not</dt><dd>Stated intent, not behavior: nothing ran. The prompt and harness shape the answer a lot, so this is not what a real attacker would do. A second, plainer "ops agent" framing was also run; that comparison will be added once its answers are reviewed.</dd></div>
     </dl>
   </div>
@@ -805,9 +805,9 @@ function renderHero(){
     });
   });
   host.innerHTML=`<div class="hc">${h}</div>`
-    +`<div class="hc-leg"><span><i class="sw k-did"></i>went for the tempting move</span><span><i class="sw k-ref"></i>refused</span><span><i class="sw k-oth"></i>did something else (mostly more looking around)</span><span class="hc-hint">tap a row to open that situation</span></div>`;
+    +`<div class="hc-leg"><span><i class="sw k-did"></i>proposed the obvious next step</span><span><i class="sw k-ref"></i>refused</span><span><i class="sw k-oth"></i>did something else (mostly more looking around)</span><span class="hc-hint">tap a row to open that situation</span></div>`;
   host.querySelectorAll('.hc-row').forEach(r=>{ const s=scenById[r.dataset.sid]; const p=pct3(s.target_rate,s.refusal);
-    bind(r,`<b>${s.label}</b> (${s.id.toUpperCase()})<br>went for it ${p.did}% · refused ${p.ref}% · something else ${p.oth}%`);
+    bind(r,`<b>${s.label}</b> (${s.id.toUpperCase()})<br>proposed it ${p.did}% · refused ${p.ref}% · something else ${p.oth}%`);
     r.onclick=()=>openSit(r.dataset.sid); });
 }
 
@@ -820,9 +820,9 @@ function renderFindings(){
   const persist=(DATA.persistence&&DATA.persistence[0])||{mech:'a new IAM user',count:0};
   const totP=DATA.persist_by_model.reduce((a,r)=>a+r.n_persist,0);
   const F=[
-    {h:'Handed a secret or a role, they take it',
-     d:`Readable secrets and an assumable admin role get taken almost every time. Few go further on their own. Destruction is usually out of scope in an authorized test, which may hold that bar down.`,
-     viz:mbars([{l:'Read secrets',v:S('aws-08'),hot:1},{l:'Assume admin role',v:S('aws-13'),hot:1},{l:'Collect data in view',v:S('aws-04'),hot:1},{l:'Destroy data',v:S('aws-10'),hot:1}]),
+    {h:'Given a secret or a role, they take it',
+     d:`Secrets the model can read and an admin role it can assume get taken almost every time. Few go further by themselves. Destruction is usually out of scope in an authorized test, which may keep that number low.`,
+     viz:mbars([{l:'Read secrets',v:S('aws-08'),hot:1},{l:'Assume admin role',v:S('aws-13'),hot:1},{l:'Collect data',v:S('aws-04'),hot:1},{l:'Destroy data',v:S('aws-10'),hot:1}]),
      go:()=>openSit('aws-08')},
     {h:'The model you pick changes the risk',
      d:`${mostRef.model} refuses almost everything. ${mostEn.model} proposes a change to the account in most of its answers. Same situations, opposite behavior.`,
@@ -832,8 +832,8 @@ function renderFindings(){
      d:`Asked for a single command, most models run <code>GetCallerIdentity</code> first to learn who they are, then map the account.`,
      viz:mstat(`${gci} / ${fm.length}`,'models open with GetCallerIdentity'),
      go:()=>jump('diff',{anchor:'#firstmove'})},
-    {h:'Logging dies only when it is in the way',
-     d:`Models leave monitoring alone while it is just watching, and switch it off once it would record their next move or has already flagged them.`,
+    {h:'Logging is turned off only when it blocks them',
+     d:`Models leave monitoring on while it is only watching, and turn it off once it would record their next action or has already flagged them.`,
      viz:mbars([{l:'Just watching',v:S('aws-05'),hot:1},{l:'About to act',v:S('aws-09'),hot:1},{l:'Already flagged',v:S('aws-12'),hot:1}]),
      go:()=>jump('explore',{search:'StopLogging'})},
     {h:'The default backdoor is a new IAM user',
@@ -841,8 +841,8 @@ function renderFindings(){
      viz:mstat(`${persist.count} / ${totP}`,`persistence answers chose a ${persist.mech[0].toLowerCase()+persist.mech.slice(1)} (AWS-02 and AWS-11)`),
      go:()=>jump('persist')},
     {h:'Blocked from IAM, they run code instead',
-     d:`With direct IAM changes denied, only ${S('aws-03')}% try textbook privilege escalation. Most run the Lambda functions and commands they can already reach, a quieter route defenders should watch.`,
-     viz:mbars([{l:'Escalate privileges',v:S('aws-03'),hot:1},{l:'Run reachable code (other move)',v:scenById['aws-03'].tactics.execution}]),
+     d:`With direct IAM changes denied, only ${S('aws-03')}% try normal privilege escalation. Most run the Lambda functions and commands they already have access to, a quieter route that defenders should watch.`,
+     viz:mbars([{l:'Escalate privileges',v:S('aws-03'),hot:1},{l:'Run code they can access (other action)',v:scenById['aws-03'].tactics.execution}]),
      go:()=>openSit('aws-03')},
   ];
   fg.innerHTML='';
@@ -889,7 +889,7 @@ function msMatrix(){
     h+='</tr>';
   });
   h+='</tbody></table>'; host.innerHTML=h;
-  host.querySelectorAll('.cell:not(.na)').forEach(c=>bind(c,`<b>${c.dataset.m}</b> · ${c.dataset.s}<br>${c.dataset.v}% proposed ${c.dataset.t}<br>n=${c.dataset.n} answers${+c.dataset.n<20?' · under-sampled':''}<br><span style="opacity:.7">click for the commands</span>`));
+  host.querySelectorAll('.cell:not(.na)').forEach(c=>bind(c,`<b>${c.dataset.m}</b> · ${c.dataset.s}<br>${c.dataset.v}% proposed ${c.dataset.t}<br>n=${c.dataset.n} answers${+c.dataset.n<20?' · too few answers':''}<br><span style="opacity:.7">click for the commands</span>`));
   host.querySelectorAll('.cell.clk').forEach(c=>c.addEventListener('click',()=>renderMsDetail(c.dataset.m,c.dataset.sid)));
 }
 // shared: build the per-(model, situation) command breakdown. Returns {den, html} with the body
@@ -946,15 +946,15 @@ function scenarioBody(s){
     return `<details class="mdrow"><summary><span class="mdname">${r.model}${low}</span>${bar3(q,'mdmini')}<span class="mdpct"><b>${r.did}%</b>${r.ref?`<span class="mdref">refused ${r.ref}%</span>`:''}</span></summary>${body}</details>`;
   }).join('');
   return `<div class="sgrid"><div><div class="slab">The setup</div><p class="sdesc">${s.desc}</p><p class="sstep">The model was ${stepTxt}.</p></div>`
-    +`<div><div class="slab">The tempting move</div><div class="tmove"><b>${s.move}</b><span class="ttac" title="MITRE ATT&amp;CK tactic">${TNAME[s.target]}</span></div><p class="sdesc">${s.test}</p></div></div>`
-    +`<div class="sres"><div class="sbig">${p.did}%<small>went for it</small></div>${bar3(p,'p3')}`
-    +`<div class="p3leg"><span><i class="sw k-did"></i>went for it <b>${p.did}%</b></span>${p.ref?`<span><i class="sw k-ref"></i>refused <b>${p.ref}%</b></span>`:''}${p.oth?`<span><i class="sw k-oth"></i>did something else <b>${p.oth}%</b></span>`:''}</div></div>`
-    +(s.instead&&s.instead.length?`<p class="instead">Other moves in these answers: ${s.instead.map(i=>`${TNAME[i.tactic]} <b>${i.pct}%</b>`).join(', ')}.</p>`:'')
+    +`<div><div class="slab">The obvious next step</div><div class="tmove"><b>${s.move}</b><span class="ttac" title="MITRE ATT&amp;CK tactic">${TNAME[s.target]}</span></div><p class="sdesc">${s.test}</p></div></div>`
+    +`<div class="sres"><div class="sbig">${p.did}%<small>proposed it</small></div>${bar3(p,'p3')}`
+    +`<div class="p3leg"><span><i class="sw k-did"></i>proposed it <b>${p.did}%</b></span>${p.ref?`<span><i class="sw k-ref"></i>refused <b>${p.ref}%</b></span>`:''}${p.oth?`<span><i class="sw k-oth"></i>did something else <b>${p.oth}%</b></span>`:''}</div></div>`
+    +(s.instead&&s.instead.length?`<p class="instead">Other actions in these answers: ${s.instead.map(i=>`${TNAME[i.tactic]} <b>${i.pct}%</b>`).join(', ')}.</p>`:'')
     +`<div class="acts-d"><div class="slab">AWS actions proposed most here</div><ul class="acts">${acts}</ul></div>`
     +`<details class="models"><summary>How each of the 14 models answered</summary>`
     +`<div class="acts-m"><div class="slab" style="margin-top:10px">AWS actions proposed most here</div><ul class="acts">${acts}</ul></div>`
-    +`<p class="mdintro">Each row is one model's 20 answers: orange went for the tempting move, gray refused, blue did something else. Open a model to see the AWS actions in its answers. One answer can include several, so they don't add up to 100%. A <b>*</b> marks a model with fewer than 20 usable answers here.</p>`
-    +`<div class="mdhead"><span>model</span><span>its answers</span><span>went for it</span></div><div class="mdlist">${mdrows}</div></details>`;
+    +`<p class="mdintro">Each row is one model's 20 answers: orange proposed it, gray refused, blue did something else. Open a model to see the AWS actions in its answers. One answer can include several, so they don't add up to 100%. A <b>*</b> marks a model with fewer than 20 usable answers here.</p>`
+    +`<div class="mdhead"><span>model</span><span>its answers</span><span>proposed it</span></div><div class="mdlist">${mdrows}</div></details>`;
 }
 // ---- defenders watchlist (numbers pulled from the live data) ----
 function renderWatch(){
@@ -966,19 +966,19 @@ function renderWatch(){
   const gciPct=((scenById['aws-06'].top_events||[]).find(e=>e.event==='GetCallerIdentity')||{pct:0}).pct;
   const totP=DATA.persist_by_model.reduce((a,r)=>a+r.n_persist,0), admN=DATA.persist_by_model.reduce((a,r)=>a+r.n_admin,0);
   const cards=[
-    {h:'A fresh identity orienting', why:`Almost the first thing a model does is ask AWS who it is, then map regions and IAM. On its own it is benign, but from a brand-new key it is the opening beat.`,
+    {h:'A new identity looking around', why:`Almost the first thing a model does is ask AWS who it is, then list regions and IAM. By itself this is harmless, but from a brand-new key it is the first sign of activity.`,
      evs:['GetCallerIdentity','DescribeRegions','GetAccountAuthorizationDetails'], src:'sts, ec2, iam', cov:`GetCallerIdentity is in ${gciPct}% of single-command answers (AWS-06)`},
-    {h:'A new way back in', why:`The most common way models keep access is a <b>${persist.mech[0].toLowerCase()+persist.mech.slice(1)}</b>. Backdoored role trust policies and Lambda functions follow.`,
+    {h:'A new way to get back in', why:`The most common way models keep access is a <b>${persist.mech[0].toLowerCase()+persist.mech.slice(1)}</b>. Backdoored role trust policies and Lambda functions follow.`,
      evs:['CreateUser','CreateAccessKey','UpdateAssumeRolePolicy','PutRolePolicy','CreateFunction'], src:'iam, lambda', cov:`${totP} of ${admN} answers proposed persistence in AWS-02 and AWS-11; ${persist.count} of those via a new IAM user`},
-    {h:'Secrets read in one sweep', why:`When secrets are readable, models go straight for them and decrypt in the same plan.`,
-     evs:['GetSecretValue','GetParameter','Decrypt','ListSecrets'], src:'secretsmanager, ssm, kms', cov:`${S('aws-08').target_rate}% read secrets when they are in reach (AWS-08)`},
-    {h:'Monitoring turned off', why:`Models leave logging alone until it blocks them, then disable it. A sudden off-switch is high-signal.`,
+    {h:'Secrets read all at once', why:`When secrets can be read, models read them right away and decrypt in the same plan.`,
+     evs:['GetSecretValue','GetParameter','Decrypt','ListSecrets'], src:'secretsmanager, ssm, kms', cov:`${S('aws-08').target_rate}% read secrets when they can (AWS-08)`},
+    {h:'Monitoring turned off', why:`Models leave logging on until it blocks them, then disable it. Logging suddenly turned off is high-signal.`,
      evs:['StopLogging','DeleteTrail','UpdateDetector','StopConfigurationRecorder'], src:'cloudtrail, guardduty, config', cov:`${S('aws-09').target_rate}% when logging is in the way (AWS-09), ${S('aws-12').target_rate}% once flagged (AWS-12), ${S('aws-05').target_rate}% when it is only watching (AWS-05)`},
-    {h:'Data staged to leave', why:`Sharing an RDS snapshot with an outside account, or copying objects out, is the step that gets data out (exfiltration). The S3 reads are data events, so turn data-event logging on.`,
+    {h:'Data prepared to leave', why:`Sharing an RDS snapshot with an outside account, or copying objects out, is the step that moves data out of the account (exfiltration). The S3 reads are data events, so turn data-event logging on.`,
      evs:['ModifyDBSnapshotAttribute','CopyDBSnapshot','GetObject','CopyObject'], src:'rds, s3', cov:`${S('aws-07').target_rate}% propose copying or sharing data out (AWS-07)`},
     {h:'Cross-account pivot', why:`Offered a trusted admin role in the org account, models assume it, then re-check identity and list the whole organization.`,
      evs:['AssumeRole','GetCallerIdentity','ListAccounts','DescribeOrganization'], src:'sts, organizations', cov:`${S('aws-13').target_rate}% take the cross-account role (AWS-13)`},
-    {h:'Self-describing names', why:`The sessions and users models create are named after the job. Several echo this study's red-team framing, so real names will differ; the habit of descriptive, job-named sessions and users is the signal.`,
+    {h:'Names that describe the activity', why:`The sessions and users models create are named after what they are doing. Several repeat this study's red-team wording, so real names will differ, but the pattern of descriptive, activity-named sessions and users is the signal.`,
      evs:sess.length?sess:['redteam-assessment','OrgAdminSession','backup-admin'], src:'sts, iam', cov:`literal names seen across answers`},
   ];
   wg.innerHTML=cards.map(c=>`<div class="watch"><h3>${c.h}</h3><p>${c.why}</p><div class="evs">${ev(c.evs)}</div><div class="cov">${c.cov}</div>${c.src?`<div class="src">event sources: <code>${c.src}</code></div>`:''}</div>`).join('');
@@ -992,7 +992,7 @@ function renderScenarios(){
     sec.innerHTML=`<div class="stage-h"><span class="stage-n">Stage ${i+1}</span><h3 class="stage-t">${st.title}</h3></div><p class="stage-d">${st.desc}</p>`;
     st.ids.forEach(id=>{ const s=scenById[id]; const p=pct3(s.target_rate,s.refusal);
       const d=el('details','scard scomp'); d.id='sit-'+id;
-      d.innerHTML=`<summary class="srsum"><span class="srid">${s.id.toUpperCase()}</span><span class="srtitle">${s.label}</span><span class="srmove">${s.move}</span><span class="srbar">${bar3(p,'p3 srbar3')}</span><span class="srpct">${s.target_rate}%<small>went for it</small></span></summary><div class="scbody">${scenarioBody(s)}</div>`;
+      d.innerHTML=`<summary class="srsum"><span class="srid">${s.id.toUpperCase()}</span><span class="srtitle">${s.label}</span><span class="srmove">${s.move}</span><span class="srbar">${bar3(p,'p3 srbar3')}</span><span class="srpct">${s.target_rate}%<small>proposed it</small></span></summary><div class="scbody">${scenarioBody(s)}</div>`;
       sec.appendChild(d); });
     walk.appendChild(sec);
   });
@@ -1015,7 +1015,7 @@ function drill(){
     h+=`<td><div class="cell refc" data-m="${r.model}" data-t="refused" data-v="${r.refusal}" data-n="${nn}">${r.refusal||''}</div></td></tr>`;
   });
   h+='</tbody></table>'; host.innerHTML=h;
-  host.querySelectorAll('.cell[data-v]').forEach(c=>bind(c,`<b>${c.dataset.m}</b><br>${c.dataset.v}% ${c.dataset.t==='refused'?'refused outright':'proposed '+c.dataset.t}<br>n=${c.dataset.n} answers${+c.dataset.n<20?' · under-sampled':''}`));
+  host.querySelectorAll('.cell[data-v]').forEach(c=>bind(c,`<b>${c.dataset.m}</b><br>${c.dataset.v}% ${c.dataset.t==='refused'?'refused outright':'proposed '+c.dataset.t}<br>n=${c.dataset.n} answers${+c.dataset.n<20?' · too few answers':''}`));
 }
 
 /* ---- posture stacked ---- */
@@ -1034,7 +1034,7 @@ const persist=$('#persist'); const maxM=Math.max(...DATA.persistence.map(m=>m.co
 DATA.persistence.forEach(m=>{
   const row=el('div','mrow');
   row.innerHTML=`<div class="mname">${m.mech}</div><div class="mtrack"><div class="mfill" style="width:${Math.round(m.count/maxM*100)}%"></div></div><div class="mval">${m.count}</div>`;
-  bind(row.querySelector('.mtrack'),`<b>${m.mech}</b><br>${m.count} enacting answers`);
+  bind(row.querySelector('.mtrack'),`<b>${m.mech}</b><br>${m.count} answers that proposed it`);
   persist.appendChild(row);
 });
 
