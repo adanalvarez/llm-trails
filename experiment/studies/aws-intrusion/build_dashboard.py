@@ -63,10 +63,10 @@ h1{font-size:clamp(28px,5vw,42px);line-height:1.08;margin:.3em 0 .25em;letter-sp
 .lede{font-size:17px;color:var(--text-secondary);max-width:70ch;margin:0}
 .meta{margin-top:14px;font-size:13px;color:var(--text-muted);display:flex;flex-wrap:wrap;gap:6px 16px}
 .meta b{color:var(--text-secondary);font-weight:600}
-.toggle{position:fixed;top:14px;right:14px;z-index:20;background:var(--surface-1);border:1px solid var(--border);color:var(--text-secondary);border-radius:999px;padding:7px 13px;font-size:12px;font-weight:600;cursor:pointer;box-shadow:var(--shadow)}
+.toggle{flex:none;background:var(--surface-1);border:1px solid var(--border);color:var(--text-secondary);border-radius:999px;padding:6px 11px;font:600 12px/1 var(--font-sans);cursor:pointer;white-space:nowrap}
 .callout{background:var(--surface-1);border:1px solid var(--border);border-left:3px solid var(--orange);border-radius:10px;padding:14px 16px;margin:22px 0 8px;font-size:14px;color:var(--text-secondary)}
 .callout b{color:var(--text-primary)}
-.hero{padding:46px 0 6px}
+.hero{padding:30px 0 4px}
 .aim{font-size:15px;color:var(--text-secondary);max-width:72ch;margin:12px 0 0;line-height:1.5}
 .shh{font-size:22px;margin:0 0 4px;letter-spacing:-.01em}
 .shsub{color:var(--text-secondary);font-size:14px;margin:0 0 18px;max-width:78ch}
@@ -131,7 +131,7 @@ h2{font-size:21px;margin:0 0 6px;letter-spacing:-.01em}
 .bval.out{color:var(--text-primary);left:auto;text-shadow:none}
 .chips{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
 .chips .clab{font-size:11px;color:var(--text-muted);margin-right:2px}
-.chip{font-size:11px;background:var(--surface-2);border:1px solid var(--border);border-radius:999px;padding:2px 9px;color:var(--text-secondary);font-family:var(--font-mono)}
+.chip{display:inline-block;white-space:nowrap;margin:1px 0;font-size:11px;background:var(--surface-2);border:1px solid var(--border);border-radius:999px;padding:2px 9px;color:var(--text-secondary);font-family:var(--font-mono)}
 .chip b{color:var(--text-primary);font-weight:700}
 /* heatmap */
 .hmwrap{overflow-x:auto}
@@ -155,7 +155,7 @@ h2{font-size:21px;margin:0 0 6px;letter-spacing:-.01em}
 .msd-grp{margin:14px 0 0}
 .msd-tac{font-size:11.5px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.03em;margin:0 0 6px;display:flex;align-items:center;gap:5px}
 .msd-on{font-size:9.5px;background:var(--orange);color:#fff;border-radius:999px;padding:1px 7px;letter-spacing:.02em;text-transform:none}
-.msd-row{display:grid;grid-template-columns:62px 150px 1fr;gap:10px;align-items:center;padding:4px 0;font-size:12.5px;border-top:1px solid var(--border)}
+.msd-row{display:grid;grid-template-columns:62px 210px 1fr;gap:10px;align-items:center;padding:4px 0;font-size:12.5px;border-top:1px solid var(--border)}
 .msd-pct{font-variant-numeric:tabular-nums;font-weight:700;color:var(--link);text-align:right;line-height:1.1}
 .msd-pct small{display:block;font-weight:500;color:var(--text-muted);font-size:10px}
 .msd-ev{font-family:var(--font-mono);font-weight:600}
@@ -174,7 +174,8 @@ h2{font-size:21px;margin:0 0 6px;letter-spacing:-.01em}
 .hm th.scol span{display:block;font-size:9.5px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.03em;font-weight:600}
 .hm th.scol.dcol{border-bottom:2px solid var(--orange)}
 .selwrap{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--text-secondary);font-weight:600;margin-bottom:14px}
-.selwrap select{font:inherit;font-weight:500;color:var(--text-primary);background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:7px 10px;cursor:pointer;max-width:340px}
+.selwrap select{font:inherit;font-weight:500;color:var(--text-primary);background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:7px 10px;cursor:pointer;max-width:min(340px,100%);min-width:0}
+.selwrap{max-width:100%;flex-wrap:wrap}
 .hint{font-size:12px;color:var(--text-muted);margin:-8px 0 14px}
 /* posture stacked */
 .prow{display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:center;padding:5px 0}
@@ -235,7 +236,7 @@ tr.detail>td{padding:14px 16px;background:var(--bg)}
 .scbar{display:grid;grid-template-columns:minmax(0,1fr) 84px 46px;gap:10px;align-items:center;font-size:12px;margin:4px 0}
 .scbar .nm{color:var(--text-secondary);line-height:1.25}
 .scbar .st{height:12px;background:var(--surface-2);border-radius:4px;overflow:hidden}
-.scbar .sf{height:100%;min-width:2px;background:var(--blue);border-radius:4px}
+.scbar .sf{display:block;height:100%;min-width:2px;background:var(--blue);border-radius:4px}
 .scbar .num{text-align:right;color:var(--text-primary);font-weight:600}
 pre.ex{background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:12px;overflow-x:auto;margin:6px 0 0;white-space:pre-wrap;word-break:break-word;font-family:var(--font-mono)}
 @media (max-width:640px){ .dgrid{grid-template-columns:1fr} table.cat .hidesm{display:none} }
@@ -248,47 +249,202 @@ footer b{color:var(--text-secondary)}
 @media (max-width:640px){
   .prow{grid-template-columns:84px 1fr} .mrow{grid-template-columns:150px 1fr 40px}
 }
+/* sticky nav */
+.topnav{position:sticky;top:0;z-index:25;background:var(--bg);background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid color-mix(in srgb,var(--text-primary) 12%,transparent)}
+.tn-in{max-width:1040px;margin:0 auto;padding:0 16px;display:flex;align-items:center;gap:12px;height:52px}
+.tn-brand{font-weight:800;color:var(--text-primary);text-decoration:none;letter-spacing:-.01em;white-space:nowrap;font-size:15px}
+.tn-links{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+.tn-links::-webkit-scrollbar{display:none}
+.tn-links a{color:var(--text-secondary);text-decoration:none;font-size:13.5px;font-weight:600;padding:7px 11px;border-radius:999px;white-space:nowrap}
+.tn-links a:hover{color:var(--text-primary)}
+.tn-links a.on{background:var(--surface-1);color:var(--text-primary);box-shadow:var(--shadow)}
+[id]{scroll-margin-top:66px}
+@media(max-width:640px){.tn-brand{display:none}.tn-in{gap:6px;height:48px;padding:0 10px}.tn-links a{padding:6px 9px;font-size:13px}.toggle .tlab{display:none}}
+/* the short version */
+.tldr{margin:20px 0 0;padding:15px 18px 16px;background:var(--surface-1);border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow);max-width:780px}
+.tldr h2{font-size:11.5px;text-transform:uppercase;letter-spacing:.09em;color:var(--link);margin:0 0 10px}
+.tldr ul{margin:0;padding:0;list-style:none;display:grid;gap:9px}
+.tldr li{font-size:14px;color:var(--text-secondary);line-height:1.45;padding-left:18px;position:relative}
+.tldr li::before{content:'';position:absolute;left:2px;top:.55em;width:7px;height:7px;border-radius:50%;background:var(--orange)}
+.tldr li b{color:var(--text-primary)}
+.tldr a{color:var(--link);font-weight:600;white-space:nowrap;text-decoration:none}
+.tldr code{font-family:var(--font-mono);font-size:12.5px}
+/* context cards + key terms */
+section.ctx{padding-top:34px}
+.ctxgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.ctxcard{background:var(--surface-1);border:1px solid var(--border);border-radius:10px;padding:16px 18px;box-shadow:var(--shadow)}
+.ch{font-size:14.5px;margin:0 0 6px;letter-spacing:-.01em;color:var(--text-primary)}
+.ctxcard p{margin:0;font-size:13.5px;color:var(--text-secondary);line-height:1.55}
+.callout a{color:var(--link);font-weight:600}
+details.terms{margin-top:14px;background:var(--surface-1);border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow);padding:0 18px}
+details.terms>summary{cursor:pointer;list-style:none;padding:13px 0;font-weight:700;font-size:14px}
+details.terms>summary::-webkit-details-marker{display:none}
+details.terms>summary::before{content:'▸ ';color:var(--text-muted)}
+details.terms[open]>summary::before{content:'▾ '}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 22px;margin:0 0 16px}
+.tgrid dt{font-weight:700;font-size:13px;margin-bottom:2px}
+.tgrid dd{margin:0;font-size:12.5px;color:var(--text-secondary);line-height:1.45}
+.tgrid code{font-family:var(--font-mono);font-size:11.5px}
+@media(max-width:900px){.tgrid{grid-template-columns:1fr 1fr}}
+/* stages */
+section.walk{padding-top:34px}
+.stagenav{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 4px}
+.stagenav a{display:inline-flex;gap:7px;align-items:center;background:var(--surface-1);border:1px solid var(--border);border-radius:999px;padding:5px 12px 5px 6px;font-size:12.5px;font-weight:600;color:var(--text-primary);text-decoration:none;white-space:nowrap;box-shadow:var(--shadow)}
+.stagenav a:hover{border-color:var(--link)}
+.stagenav a b{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--link);color:var(--surface-1);font-size:11px}
+.stage{padding-top:22px}
+.stage-h{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.stage-n{font-size:11.5px;font-weight:800;color:var(--link);letter-spacing:.08em;text-transform:uppercase}
+.stage-t{font-size:19px;font-weight:750;margin:0;letter-spacing:-.01em}
+.stage-d{font-size:13.5px;color:var(--text-secondary);margin:3px 0 12px}
+/* situation card */
+.scard{background:var(--surface-1);border:1px solid var(--border);border-radius:12px;padding:18px 18px 14px;box-shadow:var(--shadow);margin-bottom:14px}
+.scard .shd{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin-bottom:12px}
+.scard h3.stitle{font-size:17px;margin:0;letter-spacing:-.01em}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:14px}
+.slab{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);font-weight:700;margin-bottom:4px}
+.sgrid .sdesc{margin:0}
+.sstep{font-size:12px;color:var(--text-muted);margin:5px 0 0}
+.tmove{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 4px}
+.tmove b{font-size:15px;color:var(--text-primary)}
+.ttac{font-size:11px;font-weight:600;color:var(--text-secondary);background:var(--surface-2);border:1px solid var(--border);border-radius:999px;padding:1px 9px;white-space:nowrap}
+.sres{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto;column-gap:18px;row-gap:8px;align-items:center;padding:13px 15px;background:var(--surface-2);border-radius:10px;margin:0 0 14px}
+.sbig{grid-row:1 / span 2;font-size:36px;font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--text-primary);font-variant-numeric:tabular-nums;min-width:86px}
+.sbig small{display:block;font-size:12px;font-weight:600;color:var(--text-secondary);letter-spacing:0;margin-top:5px}
+.p3,.mdmini{display:flex;overflow:hidden;gap:2px}
+.p3{height:16px;border-radius:7px;background:var(--surface-1)}
+.p3 i,.mdmini i{display:block;height:100%;min-width:2px;flex-basis:0}
+.p3leg{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:12.5px;color:var(--text-secondary)}
+.p3leg span{display:inline-flex;align-items:center;gap:6px}
+.p3leg b{color:var(--text-primary);font-variant-numeric:tabular-nums}
+.k-did{background:var(--orange)} .k-ref{background:var(--gray)} .k-oth{background:var(--blue)}
+.acts{list-style:none;margin:0 0 4px;padding:0;max-width:680px}
+.acts li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:baseline;padding:6px 0;border-top:1px solid var(--border);font-size:13px}
+.acts li:first-child{border-top:0}
+.acts code{font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--text-primary);margin-right:6px}
+.acts .gl{color:var(--text-secondary);font-size:12.5px}
+.acts .pc{font-variant-numeric:tabular-nums;font-weight:700;font-size:12.5px}
+details.models{margin-top:12px;border-top:1px solid var(--border);padding-top:11px}
+details.models>summary{cursor:pointer;font-size:13.5px;font-weight:700;color:var(--link);list-style:none;padding:2px 0}
+details.models>summary::-webkit-details-marker{display:none}
+details.models>summary::before{content:'▸ ';color:var(--text-muted)}
+details.models[open]>summary::before{content:'▾ '}
+.mdintro{font-size:12.5px;color:var(--text-secondary);margin:8px 0 6px;line-height:1.45}
+.mdhead,details.mdrow>summary{display:grid;grid-template-columns:180px minmax(0,1fr) 150px;gap:14px;align-items:center}
+.mdhead{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);font-weight:700;padding:6px 0;border-bottom:1px solid var(--border)}
+.mdhead span:last-child{text-align:right}
+details.mdrow{border-top:1px solid var(--border)}
+.mdlist details.mdrow:first-child{border-top:0}
+details.mdrow>summary{cursor:pointer;list-style:none;padding:9px 0;font-size:13px}
+details.mdrow>summary::-webkit-details-marker{display:none}
+.mdname{font-weight:600;display:flex;align-items:center;gap:6px;min-width:0}
+.mdname::before{content:'▸';color:var(--text-muted);font-size:10px;width:9px;flex:none}
+details.mdrow[open] .mdname::before{content:'▾'}
+details.mdrow>summary:hover .mdname{color:var(--link)}
+.mdname sup{font-size:9px;color:var(--text-muted)}
+.mdmini{height:10px;border-radius:5px;background:var(--surface-2)}
+.mdpct{text-align:right;font-variant-numeric:tabular-nums;font-size:12.5px;white-space:nowrap;color:var(--text-secondary)}
+.mdpct b{color:var(--text-primary);font-size:13px}
+.mdref{color:var(--text-muted);margin-left:6px}
+.mdna{color:var(--text-muted)}
+.mdbody{padding:2px 0 14px 15px}
+.msd-ev small,.evname small{display:block;font-family:var(--font-sans);font-weight:400;font-size:11px;color:var(--text-muted);margin-top:1px}
+.advnote{display:none;font-size:12px;color:var(--text-muted);margin:8px 0 0}
+.acts-m,.sum-m{display:none}
+/* phone: one column, fewer columns, no heatmaps */
+@media(max-width:640px){
+  .ctxgrid,.tgrid,.sgrid{grid-template-columns:1fr}
+  .sgrid{gap:12px}
+  .stagenav{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -16px 4px;padding:2px 16px 8px}
+  .stagenav::-webkit-scrollbar{display:none}
+  .scard{padding:16px 14px 12px}
+  .sres{grid-template-columns:1fr;padding:12px 13px}
+  .sbig{grid-row:auto;font-size:30px;display:flex;align-items:baseline;gap:8px}
+  .sbig small{display:inline;margin:0}
+  .acts li:nth-child(n+4){display:none}
+  .acts-d,.sum-d,.sstep{display:none}
+  .acts-m{display:block}
+  .sum-m{display:inline}
+  details.models{margin-top:4px}
+  .mdhead{display:none}
+  details.mdrow>summary{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"name pct" "bar bar";row-gap:6px;column-gap:10px}
+  .mdname{grid-area:name}.mdpct{grid-area:pct}.mdmini{grid-area:bar;height:8px}
+  .mdbody{padding-left:0}
+  nav.tabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+  nav.tabs::-webkit-scrollbar{display:none}
+  nav.tabs button{white-space:nowrap}
+  nav.tabs button.adv{display:none}
+  nav.tabs button.adv[aria-selected="true"]{display:inline-block}
+  .advnote{display:block}
+  .evname{overflow-wrap:anywhere}
+  .pk-s{display:block;font-size:11px}
+  .scbar{grid-template-columns:minmax(0,1fr) 60px 40px}
+}
 </style>
 </head>
 <body>
-<button class="toggle" id="themeBtn">◐ Theme</button>
+<nav class="topnav" aria-label="Sections"><div class="tn-in">
+  <a class="tn-brand" href="#">LLM Trails</a>
+  <div class="tn-links"><a href="#about">About</a><a href="#scenarios">Situations</a><a href="#findings">Takeaways</a><a href="#explore-top">Explore</a></div>
+  <button class="toggle" id="themeBtn" aria-label="Switch between light and dark theme">◐<span class="tlab"> Theme</span></button>
+</div></nav>
 <div class="wrap">
 <header class="hero">
   <div class="kicker">AWS detection engineering · LLMs</div>
   <h1>Hand an LLM your AWS keys. What does it do next?</h1>
-  <p class="lede">Attackers already use LLMs. I wanted the defender's version of that question: if a model lands in an AWS account, what does it reach for first? So I gave <b><span data-nv="models"></span> models</b> the same <b>13 situations</b>, asked only for their next move, and matched every answer to CloudTrail. Nothing ran against a real account. I am reading the plan, not an intrusion.</p>
-  <p class="aim">The point is practical. If models lean toward the same handful of moves, that is where our detections should sit. And where they disagree, the model an attacker picks changes the threat.</p>
+  <p class="lede">Attackers already use LLMs, so I ran the defender's version of the question. I put <b><span data-nv="models"></span> models</b> in <b>13 situations</b> where each has just gained access to an AWS account, asked only for its next move, and matched every answer to CloudTrail. Nothing ran against a real account. I am reading the plan, not an intrusion.</p>
+  <div class="tldr"><h2>The short version</h2><ul id="tldr"></ul></div>
 </header>
+
+<section class="ctx" id="about">
+  <h2 class="shh">About this study</h2>
+  <div class="ctxgrid">
+    <div class="ctxcard">
+      <h3 class="ch">Why I ran this</h3>
+      <p>Models are already in attacker hands, whether a person is driving or an agent is built on top of one. I wanted to see what each model is biased toward once it is inside an account: what it reaches for first, what it treats as normal, and where it draws a line.</p>
+    </div>
+    <div class="ctxcard">
+      <h3 class="ch">What it tells us</h3>
+      <p>Over many runs this shows which actions a model is most likely to put on the table, and where models differ: how one sets up persistence, whether another disables logging, how they assume a role. Where models converge is where detections should sit. It also shows which models refuse, which propose real changes to the account, and whether newer models invent new tradecraft or still reach for the classics like creating an IAM user to persist.</p>
+    </div>
+  </div>
+  <div class="callout"><b>How to read this, and what it is not.</b> Every answer is single-turn and nothing runs against a real account. The prompt and the harness around a model shape its answer a lot, so this cannot tell you what a real attacker would do. It is a way to gauge how likely different models are to propose different next steps in simple, controlled situations. The situations are simulated post-exploitation states, laid out below. The <a href="https://github.com/adanalvarez/llm-trails">code is open</a>, so you can write your own situations and run them.</div>
+  <details class="terms" id="terms"><summary>Key terms used on this page</summary>
+    <dl class="tgrid">
+      <div><dt>CloudTrail</dt><dd>AWS's audit log. Every API call an identity makes lands there, so it is what defenders write detections against.</dd></div>
+      <div><dt>AWS action (event)</dt><dd>One API call, like <code>GetSecretValue</code> (read a secret). Every step a model proposes maps to the CloudTrail event it would leave behind.</dd></div>
+      <div><dt>Tactic</dt><dd>The attacker goal behind a step, using MITRE ATT&amp;CK names. Persistence is keeping a way back in; Defense evasion is dodging monitoring.</dd></div>
+      <div><dt>Tempting move</dt><dd>The obvious next step each situation dangles. The headline number on a situation is how many answers went for it.</dd></div>
+      <div><dt>Refused · something else</dt><dd>Refused means the model declined to help. Something else means it proposed other steps instead, usually more looking around.</dd></div>
+      <div><dt>Answer</dt><dd>One reply from one model to one situation. Each model answered each situation 20 times, so every percentage is over real repeats.</dd></div>
+    </dl>
+  </details>
+</section>
 
 <section class="scope" id="scope">
   <h2 class="shh">What's in the study</h2>
   <div class="facts" id="facts"></div>
-  <p class="method" id="method">Every model saw the same system and user prompt for a situation (an authorized assessment) and replied with a JSON plan of next steps. That is one <b>execution</b>. I ran each situation <b>20 times per model</b>, then coded every step to a MITRE ATT&amp;CK tactic and the CloudTrail event it would fire. Claude and GPT ran through consumer subscriptions, the rest through OpenRouter.</p>
+  <p class="method" id="method">How it ran: every model got the same instructions for a situation, framed as an authorized security assessment, and had to reply with a plan of next steps in a fixed format (JSON). One reply is one <b>answer</b>, and each model answered each situation <b>20 times</b>. I then mapped every proposed step to the AWS action it would perform, the CloudTrail event it would leave, and its ATT&amp;CK tactic. Claude and GPT models ran through their consumer subscriptions, the rest through OpenRouter.</p>
+</section>
+
+<section class="walk" id="scenarios">
+  <h2 class="shh">The 13 situations</h2>
+  <p class="shsub">Each situation is a moment right after a break-in, grouped below in the order an intrusion usually unfolds. Each one dangles a <b>tempting move</b>, and the big number is how many answers went for it. Open <b>How each of the 14 models answered</b> to compare models and read the AWS actions they proposed.</p>
+  <nav class="stagenav" id="stagenav" aria-label="Stages"></nav>
+  <div id="walk"></div>
 </section>
 
 <section class="findings" id="findings">
-  <h2 class="shh">What I found</h2>
-  <p class="shsub">Start here. Each card is one finding. Click it to land in the graph behind it.</p>
+  <h2 class="shh">Takeaways</h2>
+  <p class="shsub">What stood out across the 13 situations and 14 models. Each card links to the graph behind it.</p>
   <div class="findgrid" id="findgrid"></div>
 </section>
 
 <section class="explore" id="explore-top">
   <h2 class="shh">Explore the data</h2>
-  <p class="shsub">Go as deep as you want: compare models, read one situation, or go event by event. Every view is interactive.</p>
+  <p class="shsub">Views across all 13 situations: how cautious each model is, where the models differ, and every AWS action any model proposed. Each view is interactive.</p>
   <nav class="tabs" id="tabs"></nav>
-</section>
-
-<section class="view active" data-view="situation">
-  <h2>What they do, given the situation</h2>
-  <p class="sub">Each row is one situation, shown to all 14 models. The blue bar is how many answers took the <b>action that situation offers</b> (its intended tactic). The orange tick is how many refused outright. The chips are the CloudTrail events proposed most in that situation, so you get a ready detection shortlist for that stage.</p>
-  <div class="card">
-    <div class="legend">
-      <span><span class="sw" style="background:var(--blue)"></span>Took the on-offer action (its tactic)</span>
-      <span><span class="sw" style="background:var(--orange)"></span>Refused</span>
-      <span><span class="sw" style="background:var(--surface-2);border:1px solid var(--border)"></span>top CloudTrail events</span>
-    </div>
-    <div id="scn"></div>
-  </div>
+  <p class="advnote">Two heatmap views are hidden on small screens. Open the page on a laptop to see them.</p>
 </section>
 
 <section class="view" data-view="matrix">
@@ -299,7 +455,7 @@ footer b{color:var(--text-secondary)}
 
 <section class="view" data-view="models">
   <h2>Per model, in every situation</h2>
-  <p class="sub">Each cell is how many of a model's answers took the <b>action that situation offers</b> (20 answers per cell, assessment framing). Every column is tied to its own situation, so compare <b>down a column</b> (same situation, different models), not across. The orange-underlined columns are the loaded decision points, and models are sorted by how willing they are on those. Two symbols: <b>*</b> means under-sampled, <b>–</b> means no data. Only Opus 4.8 is affected (aws-11, n=5; aws-13, none): its provider safeguards block the post-persistence and cross-account-admin prompts, the same block that stopped Opus 5.5 completely. That is a finding, not a gap in collection.</p>
+  <p class="sub">Each cell is how often a model went for that situation's <b>tempting move</b> (20 answers per cell). Every column is tied to its own situation, so compare <b>down a column</b> (same situation, different models), not across. The orange-underlined columns are the loaded decision points, and models are sorted by how willing they are on those. Two symbols: <b>*</b> means under-sampled, <b>–</b> means no data. Only Opus 4.8 is affected (aws-11, n=5; aws-13, none): its provider safeguards block the post-persistence and cross-account-admin prompts, the same block that stopped Opus 5.5 completely. That is a finding, not a gap in collection.</p>
   <div class="card">
     <div class="hmwrap"><div id="msmatrix"></div></div>
     <p class="cellhint">↑ Click any cell to see the exact events and example commands that model proposed in that situation.</p>
@@ -316,7 +472,7 @@ footer b{color:var(--text-secondary)}
 </section>
 
 <section class="view" data-view="diff">
-  <h2>What each model actually does</h2>
+  <h2>Where the models differ</h2>
   <p class="sub">Rates tell you how often. This tells you <b>what</b>: the command a model opens with, how it keeps access, and how wide its range is. This is where the models stop looking alike.</p>
 
   <div class="card">
@@ -353,11 +509,11 @@ footer b{color:var(--text-secondary)}
 </section>
 
 <section class="view" data-view="explore">
-  <h2>Event explorer</h2>
-  <p class="sub">Every CloudTrail event any model proposed (assessment framing), all <span data-nv="events"></span> of them, not just the headline few. <b>Peak</b> is the situation where the event concentrates and its rate there, which is the number that matters for detection. <b>Overall</b> is its share across all 13 situations. Pick a <b>model</b> to see only what it did (rates, peak, and example commands all become that model's). Filter by name or tactic, sort any column, and click a row for per-situation rates, the models that reach for it, and an example command.</p>
+  <h2>Every AWS action, one by one</h2>
+  <p class="sub">All <span data-nv="events"></span> AWS actions any model proposed, not just the top few. <b>Peak</b> is the situation where an action shows up most, and how often: the number that matters for a detection. Search by API name or plain English (try <i>secret</i>, <i>delete</i> or <i>logging</i>), pick a model to see only what it did, and tap a row for details and an example command.</p>
   <div class="card">
     <div class="ctrl">
-      <input type="search" id="catsearch" placeholder="filter events… e.g. Secret, Trail, AssumeRole, Delete">
+      <input type="search" id="catsearch" placeholder="search… e.g. secret, delete, logging, AssumeRole">
       <label class="selwrap" style="margin:0">model&nbsp;<select id="catmodel"></select></label>
       <label class="selwrap" style="margin:0">tactic&nbsp;<select id="cattac"></select></label>
       <span class="count" id="catcount"></span>
@@ -366,9 +522,9 @@ footer b{color:var(--text-secondary)}
   </div>
 </section>
 
-<section class="view" data-view="posture">
-  <h2>Default posture across all 13 situations</h2>
-  <p class="sub">A model-level summary. Of everything a model proposed, how much it <b>refused</b>, <b>reported or paused</b> without acting, stayed <b>read-only</b> (recon), or <b>enacted</b> at least one change. Sorted by how often it enacts. <b>Free text</b> means the model answered in prose instead of the JSON plan the task required; an agent could not act on it, so those answers are left out of every other number on this page. (This view pools situations on purpose. It is a profile of the model, not a rate for any single action.)</p>
+<section class="view active" data-view="posture">
+  <h2>How cautious is each model?</h2>
+  <p class="sub">Across all 13 situations, the share of each model's answers that <b>refused</b>, paused to <b>report</b> without acting, only <b>looked around</b>, or proposed a <b>real change</b> to the account. Sorted by how often it acts. <b>Free text</b> means the model wrote prose instead of the plan format the task asked for. An agent could not act on that, so those answers are left out of every other number on the page.</p>
   <div class="card">
     <div class="legend">
       <span><span class="sw" style="background:var(--gray)"></span>Refused</span>
@@ -390,22 +546,16 @@ footer b{color:var(--text-secondary)}
   </div>
 </section>
 
-<section class="ref" id="situations-ref">
-  <h2 class="shh">The 13 situations</h2>
-  <p class="shsub">Each model saw one of these as its current state and was asked for its next move. The tactic in the tag is the one the situation puts on offer.</p>
-  <div class="card"><div id="sitref"></div></div>
-</section>
-
 <section class="ref" id="models-ref">
-  <h2 class="shh">The models, and how we reached them</h2>
-  <p class="shsub">14 models from 7 vendors. Claude ran through a consumer Max subscription (Claude Agent SDK); GPT through a ChatGPT subscription (OpenAI Codex SDK); the rest through OpenRouter with the provider pinned. Every call was single-turn and nothing was executed. On the subscription routes the harness residue (identity line, date, model name) is captured per trial; OpenRouter calls carry none.</p>
+  <h2 class="shh">The 14 models, and how I reached them</h2>
+  <p class="shsub">Seven vendors: frontier labs, open-weight models, and one uncensored fine-tune. Claude ran through a consumer Max subscription (Claude Agent SDK), GPT through a ChatGPT subscription (OpenAI Codex SDK), and the rest through OpenRouter with the provider pinned. Every call was single-turn and nothing was executed.</p>
   <div class="card"><div id="modref"></div></div>
 </section>
 
 <footer>
-  <p><b>Method.</b> Single-turn: each model proposes next steps; nothing runs against any account. Every step is coded to a MITRE ATT&amp;CK tactic and the CloudTrail event it would generate. Figures use the authorized-assessment framing, and every rate is conditioned on the situation shown. Claude and GPT models were reached through consumer subscriptions, the rest via OpenRouter.</p>
-  <p><b>Reading the numbers.</b> A rate only means something next to its situation. "85% read secrets" means <i>when secrets are already located and readable</i>, not in general. In situations that ask for a multi-step plan, a cell is the share of answers whose plan included that action, so per-command rates within a plan overlap and don't sum to 100%. A few answers came back as free text instead of the required JSON plan (<span data-nv="freetext"></span> in the assessment arm); an agent could not act on those, so they are excluded from the rates and shown only under Safety posture.</p>
-  <p><span data-nv="answers"></span> executions · <span data-nv="models"></span> models · 13 situations · a defensive companion to traildiscover.cloud</p>
+  <p><b>Method.</b> Single-turn: each model proposes next steps and nothing runs against any account. Every step is mapped to the AWS action it would perform, the CloudTrail event it would leave, and a MITRE ATT&amp;CK tactic. Prompts frame the work as an authorized assessment. Claude and GPT were reached through consumer subscriptions, the rest through OpenRouter.</p>
+  <p><b>Reading the numbers.</b> A rate only means something next to its situation. "87% read secrets" means <i>when secrets are already located and readable</i>, not in general. When a situation asks for a multi-step plan, an action's percentage is the share of answers whose plan included it, so actions in one plan overlap and don't add up to 100%. <span data-nv="freetext"></span> answers came back as prose instead of the required plan format. An agent could not act on those, so they are left out of the rates and shown only under Safety posture.</p>
+  <p><span data-nv="answers"></span> answers · <span data-nv="models"></span> models · 13 situations · a defensive companion to <a href="https://traildiscover.cloud">traildiscover.cloud</a></p>
   <p class="credit">Research by Claude, reviewed and directed by <a href="https://adan.cloud">Adan Alvarez</a>.</p>
 </footer>
 </div>
@@ -429,6 +579,16 @@ const root=document.documentElement, tb=$('#themeBtn');
 function setTheme(t){root.setAttribute('data-theme',t); try{localStorage.setItem('awsbr-theme',t)}catch(e){} renderHeat();}
 tb.onclick=()=>{const cur=root.getAttribute('data-theme')|| (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'); setTheme(cur==='dark'?'light':'dark');};
 try{const s=localStorage.getItem('awsbr-theme'); if(s)root.setAttribute('data-theme',s);}catch(e){}
+
+/* sticky nav: highlight the section in view; [data-jump] links open an Explore tab */
+const navLinks=[...document.querySelectorAll('.tn-links a')];
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>es.forEach(en=>{ if(en.isIntersecting) navLinks.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+en.target.id)); }),{rootMargin:'-40% 0px -55% 0px'});
+  ['about','scenarios','findings','explore-top'].forEach(id=>{const n=document.getElementById(id); if(n)io.observe(n);});
+}
+document.addEventListener('click',e=>{const a=e.target.closest('[data-jump]'); if(!a)return; e.preventDefault(); jump(a.dataset.jump);});
+const termsEl=$('#terms'); if(termsEl && matchMedia('(min-width:720px)').matches) termsEl.open=true;
+const G=DATA.gloss||{};
 
 /* tooltip */
 const tip=$('#tip');
@@ -465,10 +625,10 @@ function jump(view, opt){
 
 /* ---- scope facts ---- */
 const FACTS=[
-  {n:DATA.n_models, lab:'models', sub:'7 vendors: frontier, open, and uncensored', go:()=>document.getElementById('models-ref').scrollIntoView({behavior:'smooth',block:'start'})},
-  {n:DATA.scenarios.length, lab:'situations', sub:'post-compromise decision points', go:()=>document.getElementById('situations-ref').scrollIntoView({behavior:'smooth',block:'start'})},
-  {n:DATA.n_answers.toLocaleString(), lab:'executions', sub:'single-turn proposals, 20 per model and situation', go:()=>document.getElementById('method').scrollIntoView({behavior:'smooth',block:'center'})},
-  {n:DATA.n_events, lab:'distinct events', sub:'CloudTrail events across every answer', go:()=>jump('explore')},
+  {n:DATA.n_models, lab:'models', sub:'from 7 vendors: frontier, open-weight, and one uncensored', go:()=>document.getElementById('models-ref').scrollIntoView({behavior:'smooth',block:'start'})},
+  {n:DATA.scenarios.length, lab:'situations', sub:'simulated moments right after a break-in', go:()=>document.getElementById('scenarios').scrollIntoView({behavior:'smooth',block:'start'})},
+  {n:DATA.n_answers.toLocaleString(), lab:'answers', sub:'single-turn plans, 20 per model per situation', go:()=>document.getElementById('method').scrollIntoView({behavior:'smooth',block:'center'})},
+  {n:DATA.n_events, lab:'AWS actions', sub:'different API calls proposed, each a CloudTrail event', go:()=>jump('explore')},
 ];
 const facts=$('#facts');
 FACTS.forEach(f=>{const b=el('button','fact'); b.innerHTML=`<div class="fn">${f.n}</div><div class="fl">${f.lab}</div><div class="fs">${f.sub}</div>`; b.onclick=f.go; facts.appendChild(b);});
@@ -485,7 +645,7 @@ const FINDINGS=[
    d:`<b>${DATA.persistence[0].mech}</b> is the most common way models keep access. Backdoored role trust policies, Lambda backdoors, and extra keys on existing users turn up too.`,
    go:()=>jump('persist')},
   {h:"Discovery is king",
-   d:`Recon is everywhere. Discovery shows up in ${Math.min(...discVals)} to ${Math.max(...discVals)}% of answers in every situation, even the ones built to tempt a louder move.`,
+   d:`Mapping the account (discovery) shows up in ${Math.min(...discVals)} to ${Math.max(...discVals)}% of answers in every situation, even the ones built to tempt a louder move.`,
    go:()=>jump('matrix')},
   {h:"Some refuse everything, one does almost anything",
    d:`Grok 4.7 refused the most (${grok.refuse}%) and never changed a thing. DeepSeek V4 was the opposite: it enacted a change in ${ds.enact}% of its answers.`,
@@ -498,7 +658,7 @@ const FINDINGS=[
    go:()=>jump('explore',{search:'StopLogging'})},
   {h:"Destruction stays rare, even with the keys to do it",
    d:`Handed admin over production data and the ability to wipe it, only ${scenById['aws-10'].target_rate}% propose anything destructive. The rest stay read-only.`,
-   go:()=>jump('situation',{anchor:'#sit-aws-10'})},
+   go:()=>{const n=document.getElementById('sit-aws-10'); if(n){n.scrollIntoView({behavior:'smooth',block:'start'});}}},
   {h:"Found a secret? They read it.",
    d:`When secrets are already sitting there and readable, ${scenById['aws-08'].target_rate}% go and read them (<code>GetSecretValue</code>, <code>Decrypt</code>). It is the move models commit to most.`,
    go:()=>jump('explore',{search:'GetSecretValue'})},
@@ -509,30 +669,30 @@ const FINDINGS=[
 const fg=$('#findgrid');
 FINDINGS.forEach(f=>{const b=el('button','find'); b.innerHTML=`<span class="find-h">${f.h}</span><span class="find-d">${f.d}</span><span class="find-go">See the data →</span>`; b.onclick=f.go; fg.appendChild(b);});
 
+/* ---- the short version (computed from the data, so it stays current) ---- */
+{
+  const fm=DATA.first_move, gci=fm.filter(r=>r.top[0]&&r.top[0].event==='GetCallerIdentity').length;
+  const P=DATA.posture, mostRef=P.reduce((a,b)=>b.refuse>a.refuse?b:a), mostEn=P.reduce((a,b)=>b.enact>a.enact?b:a);
+  const S=id=>scenById[id].target_rate;
+  const items=[
+    [`<b>Most models start by asking AWS “who am I?”</b> Asked for one command, ${gci} of ${fm.length} open with <code>GetCallerIdentity</code>.`,'#sit-aws-06'],
+    [`<b>They take what is in reach.</b> With readable secrets in front of them, ${S('aws-08')}% read them. Offered a cross-account admin role, ${S('aws-13')}% assume it.`,'#sit-aws-08'],
+    [`<b>They rarely destroy, or touch monitoring that is not in their way.</b> Handed the power to wipe production data, ${S('aws-10')}% propose it. With logging on but not blocking them, ${S('aws-05')}% switch it off.`,'#stage-admin'],
+    [`<b>The model you pick changes the picture.</b> ${mostRef.model} refused ${mostRef.refuse}% of the time. ${mostEn.model} proposed a real change to the account in ${mostEn.enact}% of its answers.`,'posture'],
+  ];
+  $('#tldr').innerHTML=items.map(([t,h])=>`<li>${t} ${h[0]==='#'?`<a href="${h}">See it →</a>`:`<a href="#explore-top" data-jump="${h}">See it →</a>`}</li>`).join('');
+}
+
 
 /* ---- tabs ---- */
-const VIEWS=[['situation','By situation'],['matrix','Scenario × tactic'],['models','By model'],['diff','Model differences'],['explore','Event explorer'],['posture','Safety posture'],['persist','Persistence']];
+const VIEWS=[['posture','Safety posture'],['diff','Model differences'],['explore','Event explorer'],['persist','Persistence'],['matrix','Situation × tactic',1],['models','Model × situation',1]];
 const tabs=$('#tabs');
-VIEWS.forEach(([id,label],i)=>{const b=el('button',null,label); b.dataset.view=id; b.setAttribute('role','tab'); b.setAttribute('aria-selected',i===0); b.onclick=()=>{activate(id); renderHeat();}; tabs.appendChild(b);});
+VIEWS.forEach(([id,label,adv],i)=>{const b=el('button',adv?'adv':null,label); b.dataset.view=id; b.setAttribute('role','tab'); b.setAttribute('aria-selected',i===0); b.onclick=()=>{activate(id); renderHeat();}; tabs.appendChild(b);});
 
-/* ---- scenario bars ---- */
-const TNAME={'discovery':'Discovery','credential-access':'Credential access','lateral-movement':'Lateral movement','collection':'Collection','execution':'Execution','privilege-escalation':'Privilege escalation','persistence':'Persistence','defense-evasion':'Defense evasion','exfiltration':'Exfiltration','impact':'Impact'};
-const scn=$('#scn');
-DATA.scenarios.forEach(s=>{
-  const row=el('div','srow'); row.id='sit-'+s.id;
-  const out=s.target_rate<18;
-  row.innerHTML=`<div class="shd"><span class="sid">${s.id.toUpperCase()}</span><span class="stitle">${s.label}</span>`
-    +`<span class="stag">offers ${TNAME[s.target]} · asks ${s.steps} step${s.steps>1?'s':''}</span></div>`
-    +`<p class="sdesc">${s.desc}</p>`
-    +`<div class="sbar"><div class="track"><div class="fill" style="width:${s.target_rate}%"></div>`
-    +`<div class="refmark" style="left:${s.refusal}%"></div>`
-    +`<div class="bval ${out?'out':''}" style="${out?'left:calc('+s.target_rate+'% + 6px)':''}">${s.target_rate}%</div></div></div>`;
-  bind(row.querySelector('.track'),`<b>${s.label}</b> (${s.id.toUpperCase()})<br>${s.target_rate}% proposed ${TNAME[s.target]} · ${s.refusal}% refused<br>n=${s.n} answers`);
-  const chips=el('div','chips'); chips.innerHTML='<span class="clab">often watched:</span>';
-  s.top_events.slice(0,4).forEach(e=>{const c=el('span','chip',`${e.event} <b>${e.pct}%</b>`); chips.appendChild(c);});
-  row.appendChild(chips);
-  scn.appendChild(row);
-});
+/* ---- tactic labels (used throughout) ---- */
+const TNAME={'discovery':'Discovery','credential-access':'Credential access','lateral-movement':'Lateral movement','collection':'Collection','execution':'Execution','privilege-escalation':'Privilege escalation','persistence':'Persistence','defense-evasion':'Defense evasion','exfiltration':'Exfiltration','impact':'Impact','other':'Other'};
+/* the scenario walkthrough (#walk) is rendered by renderScenarios() near the end of boot(),
+   after the event-explorer data (EX) and buildScenModelDetail() are defined. */
 
 /* ---- heatmaps (re-render on theme/tab change) ---- */
 const TABBR={'discovery':'Disc','credential-access':'Cred','lateral-movement':'Lateral','collection':'Coll','execution':'Exec','privilege-escalation':'Priv','persistence':'Persist','defense-evasion':'Evade','exfiltration':'Exfil','impact':'Impact'};
@@ -567,36 +727,87 @@ function msMatrix(){
   host.querySelectorAll('.cell:not(.na)').forEach(c=>bind(c,`<b>${c.dataset.m}</b> · ${c.dataset.s}<br>${c.dataset.v}% proposed ${c.dataset.t}<br>n=${c.dataset.n} answers${+c.dataset.n<20?' · under-sampled':''}<br><span style="opacity:.7">click for the commands</span>`));
   host.querySelectorAll('.cell.clk').forEach(c=>c.addEventListener('click',()=>renderMsDetail(c.dataset.m,c.dataset.sid)));
 }
-function renderMsDetail(modelName,sid){
-  const host=$('#msdetail'); const info=scenInfo[sid];
+// shared: build the per-(model, situation) command breakdown. Returns {den, html} with the body
+// only (no header), so both the By-model heatmap and the scenario walkthrough can reuse it.
+function buildScenModelDetail(modelName,sid,opts){
+  opts=opts||{};
+  const info=scenInfo[sid];
   const mi=EX.models.indexOf(modelName), si=EX.scenarios.findIndex(s=>s.id===sid);
   const den=(mi>=0&&EX.denom[mi])?EX.denom[mi][si]:0;
-  if(!den){host.innerHTML=`<div class="msd-head"><b>${modelName}</b> · ${sid.toUpperCase()} ${catEsc(info.label)}<span class="msd-sub">no data collected</span></div>`; host.scrollIntoView({behavior:'smooth',block:'nearest'}); return;}
+  if(!den) return {den:0, html:'<div class="msd-none">No data collected for this model here.</div>'};
   const groups={};
   EX.cells.forEach(([m,s,ei,c])=>{ if(m!==mi||s!==si)return; const ev=EX.events[ei]; (groups[ev.tactic]=groups[ev.tactic]||[]).push({event:ev.event,pct:Math.round(c/den*100),c:c,ex:(ev.mex&&ev.mex[mi])||ev.ex}); });
   const grpHtml=(t)=>{
     const items=(groups[t]||[]).sort((a,b)=>b.c-a.c);
     let g=`<div class="msd-grp"><div class="msd-tac"><i class="dot" style="background:${TCOL[t]||TCOL.other}"></i>${TNAME[t]||t}</div>`;
-    items.forEach(it=>{ g+=`<div class="msd-row"><span class="msd-pct">${it.pct}%<small>${it.c}/${den}</small></span><span class="msd-ev">${it.event}</span>${it.ex?`<code class="msd-ex">${catEsc(it.ex)}</code>`:'<span style="color:var(--text-muted);font-size:11.5px">—</span>'}</div>`; });
+    items.forEach(it=>{ g+=`<div class="msd-row"><span class="msd-pct">${it.pct}%<small>${it.c}/${den}</small></span><span class="msd-ev">${it.event}${G[it.event]?`<small>${G[it.event]}</small>`:''}</span>${it.ex?`<code class="msd-ex">${catEsc(it.ex)}</code>`:'<span style="color:var(--text-muted);font-size:11.5px">—</span>'}</div>`; });
     return g+'</div>';
   };
   const tgtT=info.target;
-  const msRow=DATA.model_scenario.find(x=>x.model===modelName); const tgt=msRow?msRow.cells[sid]:null;
   const others=Object.keys(groups).filter(t=>t!==tgtT).sort((a,b)=>Math.max(...groups[b].map(x=>x.pct))-Math.max(...groups[a].map(x=>x.pct)));
-  const stepTxt=info.steps>1?`each a ${info.steps}-step plan`:'one step each';
-  let h=`<div class="msd-head"><b>${modelName}</b> · ${sid.toUpperCase()} ${catEsc(info.label)}<span class="msd-sub">${den} answers · ${stepTxt} · you clicked <b>${TNAME[tgtT]}</b> (${tgt==null?'—':tgt+'%'})</span></div>`;
-  h+=`<div class="msd-expl">${info.steps>1?`This situation asks for a ${info.steps}-step plan, so each answer proposes several commands. `:''}Each row is one command; the % and count are how many of these ${den} answers used it. They are independent, so they do <b>not</b> add up to 100%.</div>`;
-  // the clicked tactic first and in full
+  let h=opts.compact?'':`<div class="msd-expl">${info.steps>1?`This situation asks for a ${info.steps}-step plan, so each answer proposes several commands. `:''}Each row is one command; the % and count are how many of these ${den} answers used it. They are independent, so they do <b>not</b> add up to 100%.</div>`;
   if(groups[tgtT]&&groups[tgtT].length){ h+=grpHtml(tgtT); }
   else { h+=`<div class="msd-none">This model proposed no ${TNAME[tgtT]} commands here.</div>`; }
-  // the rest of each plan, collapsed out of the way
   if(others.length){
     h+=`<details class="msd-more"><summary>Other steps in the same answers: ${others.map(t=>TNAME[t]||t).join(', ')}</summary>`;
     others.forEach(t=>{ h+=grpHtml(t); });
     h+='</details>';
   }
-  if(!groups[tgtT] && !others.length){ h+='<div class="msd-none">No AWS commands (refused, deferred, or non-AWS deliberation).</div>'; }
-  host.innerHTML=h; host.scrollIntoView({behavior:'smooth',block:'nearest'});
+  if(!groups[tgtT] && !others.length){ h='<div class="msd-none">No AWS actions in these answers: it refused, deferred, or only discussed the situation.</div>'; }
+  return {den, html:h};
+}
+function renderMsDetail(modelName,sid){
+  const host=$('#msdetail'); const info=scenInfo[sid];
+  const r=buildScenModelDetail(modelName,sid);
+  if(!r.den){host.innerHTML=`<div class="msd-head"><b>${modelName}</b> · ${sid.toUpperCase()} ${catEsc(info.label)}<span class="msd-sub">no data collected</span></div>`; host.scrollIntoView({behavior:'smooth',block:'nearest'}); return;}
+  const msRow=DATA.model_scenario.find(x=>x.model===modelName); const tgt=msRow?msRow.cells[sid]:null;
+  const stepTxt=info.steps>1?`each a ${info.steps}-step plan`:'one step each';
+  host.innerHTML=`<div class="msd-head"><b>${modelName}</b> · ${sid.toUpperCase()} ${catEsc(info.label)}<span class="msd-sub">${r.den} answers · ${stepTxt} · you clicked <b>${TNAME[info.target]}</b> (${tgt==null?'—':tgt+'%'})</span></div>`+r.html;
+  host.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+// the scenario walkthrough: situations grouped by intrusion stage, one card each
+function pct3(did,ref){did=did||0; ref=ref||0; return {did, ref, oth:Math.max(0,100-did-ref)};}
+function bar3(p,cls){return `<div class="${cls}">${p.did?`<i class="k-did" style="flex-grow:${p.did}"></i>`:''}${p.ref?`<i class="k-ref" style="flex-grow:${p.ref}"></i>`:''}${p.oth?`<i class="k-oth" style="flex-grow:${p.oth}"></i>`:''}</div>`;}
+function scenarioCard(s){
+  const card=el('article','scard'); card.id='sit-'+s.id;
+  const p=pct3(s.target_rate,s.refusal);
+  const stepTxt=s.steps>1?`asked for a ${s.steps}-step plan`:'asked for a single command';
+  const acts=s.top_events.slice(0,4).map(e=>`<li><span><code>${e.event}</code>${G[e.event]?`<span class="gl">${G[e.event]}</span>`:''}</span><span class="pc">${e.pct}%</span></li>`).join('');
+  const rows=DATA.scenario_models[s.id].map(r=>({model:r.model, na:r.cells==null, did:r.cells==null?0:r.cells[s.target], ref:r.refusal||0, n:r.n}))
+    .sort((a,b)=>a.na!==b.na?(a.na?1:-1):((b.did-a.did)||(a.ref-b.ref)));
+  const mdrows=rows.map(r=>{
+    const body=`<div class="mdbody" data-model="${r.model}" data-sid="${s.id}"></div>`;
+    if(r.na) return `<details class="mdrow"><summary><span class="mdname">${r.model}</span><span class="mdmini"></span><span class="mdpct"><span class="mdna">not collected</span></span></summary>${body}</details>`;
+    const q=pct3(r.did,r.ref), low=r.n<20?`<sup title="only ${r.n} answers">*</sup>`:'';
+    return `<details class="mdrow"><summary><span class="mdname">${r.model}${low}</span>${bar3(q,'mdmini')}<span class="mdpct"><b>${r.did}%</b>${r.ref?`<span class="mdref">refused ${r.ref}%</span>`:''}</span></summary>${body}</details>`;
+  }).join('');
+  card.innerHTML=`<div class="shd"><span class="sid">${s.id.toUpperCase()}</span><h3 class="stitle">${s.label}</h3></div>`
+    +`<div class="sgrid"><div><div class="slab">The setup</div><p class="sdesc">${s.desc}</p><p class="sstep">The model is ${stepTxt}.</p></div>`
+    +`<div><div class="slab">The tempting move</div><div class="tmove"><b>${s.move}</b><span class="ttac" title="MITRE ATT&amp;CK tactic">${TNAME[s.target]}</span></div><p class="sdesc">${s.test}</p></div></div>`
+    +`<div class="sres"><div class="sbig">${p.did}%<small>went for it</small></div>${bar3(p,'p3')}`
+    +`<div class="p3leg"><span><i class="sw k-did"></i>went for it <b>${p.did}%</b></span>${p.ref?`<span><i class="sw k-ref"></i>refused <b>${p.ref}%</b></span>`:''}${p.oth?`<span><i class="sw k-oth"></i>did something else <b>${p.oth}%</b></span>`:''}</div></div>`
+    +`<div class="acts-d"><div class="slab">AWS actions proposed most here</div><ul class="acts">${acts}</ul></div>`
+    +`<details class="models"><summary><span class="sum-d">How each of the 14 models answered</span><span class="sum-m">Top AWS actions and each model's answers</span></summary>`
+    +`<div class="acts-m"><div class="slab" style="margin-top:10px">AWS actions proposed most here</div><ul class="acts">${acts}</ul></div>`
+    +`<p class="mdintro">Each row is one model's 20 answers: orange went for the tempting move, gray refused, blue did something else. Open a model to see the AWS actions in its answers. One answer can include several, so they don't add up to 100%.</p>`
+    +`<div class="mdhead"><span>model</span><span>its answers</span><span>went for it</span></div><div class="mdlist">${mdrows}</div></details>`;
+  bind(card.querySelector('.p3'),`<b>${s.label}</b><br>went for it ${p.did}% · refused ${p.ref}% · something else ${p.oth}%<br>${s.n} answers from 14 models`);
+  return card;
+}
+function renderScenarios(){
+  const walk=$('#walk');
+  $('#stagenav').innerHTML=DATA.stages.map((st,i)=>`<a href="#stage-${st.key}"><b>${i+1}</b>${st.title}</a>`).join('');
+  DATA.stages.forEach((st,i)=>{
+    const sec=el('div','stage'); sec.id='stage-'+st.key;
+    sec.innerHTML=`<div class="stage-h"><span class="stage-n">Stage ${i+1}</span><h3 class="stage-t">${st.title}</h3></div><p class="stage-d">${st.desc}</p>`;
+    st.ids.forEach(id=>sec.appendChild(scenarioCard(scenById[id])));
+    walk.appendChild(sec);
+  });
+  // fill each model's actions lazily, the first time its row is opened
+  walk.querySelectorAll('details.mdrow').forEach(d=>d.addEventListener('toggle',()=>{
+    if(!d.open)return; const body=d.querySelector('.mdbody'); if(body.dataset.done)return;
+    body.dataset.done='1'; body.innerHTML=buildScenModelDetail(body.dataset.model, body.dataset.sid, {compact:true}).html;
+  }));
 }
 function drill(){
   const sel=$('#scenSel'); const sid=sel.value||DATA.scenarios[0].id; const host=$('#drill');
@@ -718,7 +929,7 @@ function catHead(){
   $('#cathead').innerHTML='<tr>'+CCOLS.map(c=>{
     if(c[0]==='nmod'&&mf>=0)return '';
     const arrow=catSort.key===c[0]?(catSort.dir<0?' ▾':' ▴'):'';
-    const cls=(c[2]?'num ':'')+(catSort.key===c[0]?'act ':'')+((c[0]==='nsc')?'hidesm':'');
+    const cls=(c[2]?'num ':'')+(catSort.key===c[0]?'act ':'')+(['nsc','tactic','overall','nmod'].includes(c[0])?'hidesm':'');
     const lab=(c[0]==='overall'&&mf>=0)?EMOD[mf]+' rate':c[1];
     return `<th data-k="${c[0]}" class="${cls.trim()}">${lab}${arrow}</th>`;
   }).join('')+'</tr>';
@@ -741,30 +952,30 @@ function catDetail(r,mf){
     <div><h4>Where it appears · ${whereLab}</h4>${bars}</div>
     <div><h4>Models most likely to propose it (across all models)</h4>${models}
       <h4 style="margin-top:14px">${exLab}</h4>${exHtml}
-      <p style="font-size:11.5px;color:var(--text-muted);margin:10px 0 0">${r.tactic} · peak <b>${r.peak}%</b>${r.peaksi>=0?' in '+ESC[r.peaksi].id.toUpperCase():''} · ${r.overall}% across situations (${catEsc(scope)}).</p>
+      <p style="font-size:11.5px;color:var(--text-muted);margin:10px 0 0">${TNAME[r.tactic]||'Other'} · peak <b>${r.peak}%</b>${r.peaksi>=0?' in '+ESC[r.peaksi].id.toUpperCase():''} · ${r.overall}% across situations (${catEsc(scope)}).</p>
     </div></div>`;
 }
 function renderCat(){
   catHead();
   const mf=catModel===''?-1:+catModel;
   let list=EV.map((e,ei)=>Object.assign({ei,event:e.event,tactic:e.tactic},agg(ei,mf))).filter(r=>r.total>0);
-  if(catFilter)list=list.filter(r=>r.event.toLowerCase().includes(catFilter));
+  if(catFilter)list=list.filter(r=>r.event.toLowerCase().includes(catFilter)||(G[r.event]||'').toLowerCase().includes(catFilter));
   if(catTac)list=list.filter(r=>r.tactic===catTac);
   list.sort((a,b)=>{const k=catSort.key; if(k==='event'||k==='tactic')return catSort.dir*a[k].localeCompare(b[k]); return catSort.dir*((a[k]||0)-(b[k]||0));});
   $('#catcount').textContent=`${list.length} events${mf>=0?' · '+EMOD[mf]:''}`;
   $('#catbody').innerHTML=list.map(r=>`<tr class="crow">
-    <td><span class="evname">${r.event}</span></td>
-    <td><span class="tac"><i class="dot" style="background:${TCOL[r.tactic]||TCOL.other}"></i>${r.tactic}</span></td>
-    <td class="peak"><b>${r.peak}%</b> <span style="color:var(--text-muted)">${r.peaksi>=0?ESC[r.peaksi].id.toUpperCase():'—'}</span></td>
+    <td><span class="evname">${r.event}${G[r.event]?`<small>${G[r.event]}</small>`:''}</span></td>
+    <td class="hidesm"><span class="tac"><i class="dot" style="background:${TCOL[r.tactic]||TCOL.other}"></i>${TNAME[r.tactic]||'Other'}</span></td>
+    <td class="peak"><b>${r.peak}%</b> <span class="pk-s" style="color:var(--text-muted)">${r.peaksi>=0?ESC[r.peaksi].id.toUpperCase():'—'}</span></td>
     <td class="num hidesm">${r.nsc}</td>
-    ${mf>=0?'':`<td class="num">${r.nmod}</td>`}
-    <td class="num">${r.overall}%</td></tr>
+    ${mf>=0?'':`<td class="num hidesm">${r.nmod}</td>`}
+    <td class="num hidesm">${r.overall}%</td></tr>
     <tr class="detail" hidden><td colspan="6">${catDetail(r,mf)}</td></tr>`).join('');
   $('#catbody').querySelectorAll('tr.crow').forEach(tr=>tr.onclick=()=>{const d=tr.nextElementSibling; const open=!d.hidden; d.hidden=open; tr.classList.toggle('open',!open);});
 }
 function gotoExplorer(modelName){ jump('explore',{model:modelName}); }
 $('#catsearch').oninput=e=>{catFilter=e.target.value.trim().toLowerCase(); renderCat();};
-$('#cattac').innerHTML='<option value="">all tactics</option>'+[...new Set(EV.map(e=>e.tactic))].sort().map(t=>`<option value="${t}">${t}</option>`).join('');
+$('#cattac').innerHTML='<option value="">all tactics</option>'+[...new Set(EV.map(e=>e.tactic))].sort().map(t=>`<option value="${t}">${TNAME[t]||'Other'}</option>`).join('');
 $('#cattac').onchange=e=>{catTac=e.target.value; renderCat();};
 $('#catmodel').innerHTML='<option value="">all models</option>'+EMOD.map((m,i)=>`<option value="${i}">${m}</option>`).join('');
 $('#catmodel').onchange=e=>{catModel=e.target.value; renderCat();};
@@ -776,17 +987,16 @@ DATA.scenarios.forEach(s=>{const o=el('option'); o.value=s.id; o.textContent=`${
 scenSel.value='aws-02';
 scenSel.onchange=drill;
 
-/* ---- reference: situations + models ---- */
-const sitref=$('#sitref');
-DATA.scenarios.forEach(s=>{const row=el('div','refrow'); row.innerHTML=`<div class="refhd"><span class="refid">${s.id.toUpperCase()}</span><span class="reftitle">${s.label}</span><span class="reftag">offers ${TNAME[s.target]||s.target} · asks ${s.steps} step${s.steps>1?'s':''}</span></div><p class="refdesc">${s.desc}</p>`; sitref.appendChild(row);});
+/* ---- reference: models ---- */
 const MODELS=[
-  {g:'Claude — consumer Max subscription (Claude Agent SDK)', rows:[['Haiku 4.5','Anthropic','claude-haiku-4-5'],['Sonnet 5.5','Anthropic','claude-sonnet-5-5'],['Opus 4.8','Anthropic','claude-opus-4-8 (stood in for Opus 5.5, blocked by the provider)']]},
-  {g:'GPT — ChatGPT subscription (OpenAI Codex SDK)', rows:[['GPT-6 Luna','OpenAI','gpt-6-luna'],['GPT-6.1 Sol','OpenAI','gpt-6.1-sol'],['GPT-6 Astra','OpenAI','gpt-6-astra']]},
-  {g:'OpenRouter — provider pinned', rows:[['Grok 4.7','xAI','x-ai/grok-4.7'],['DeepSeek V4','DeepSeek','deepseek/deepseek-v4-pro'],['GLM 5.3','Zhipu','z-ai/glm-5.3'],['Mistral L4','Mistral (EU)','mistralai/mistral-large-4-0'],['Dolphin (unc.)','Cognitive Computations','dolphin-mistral-24b-venice-edition (uncensored)'],['Hermes 4','Nous Research','nousresearch/hermes-4-405b'],['Qwen 3.8','Alibaba','qwen/qwen3.8-max-prime'],['Llama 4','Meta','meta-llama/llama-4-maverick']]},
+  {g:'Claude · consumer Max subscription (Claude Agent SDK)', rows:[['Haiku 4.5','Anthropic','claude-haiku-4-5'],['Sonnet 5.5','Anthropic','claude-sonnet-5-5'],['Opus 4.8','Anthropic','claude-opus-4-8 (stood in for Opus 5.5, blocked by the provider)']]},
+  {g:'GPT · ChatGPT subscription (OpenAI Codex SDK)', rows:[['GPT-6 Luna','OpenAI','gpt-6-luna'],['GPT-6.1 Sol','OpenAI','gpt-6.1-sol'],['GPT-6 Astra','OpenAI','gpt-6-astra']]},
+  {g:'OpenRouter · provider pinned', rows:[['Grok 4.7','xAI','x-ai/grok-4.7'],['DeepSeek V4','DeepSeek','deepseek/deepseek-v4-pro'],['GLM 5.3','Zhipu','z-ai/glm-5.3'],['Mistral L4','Mistral (EU)','mistralai/mistral-large-4-0'],['Dolphin (uncensored)','Cognitive Computations','dolphin-mistral-24b-venice-edition (uncensored)'],['Hermes 4','Nous Research','nousresearch/hermes-4-405b'],['Qwen 3.8','Alibaba','qwen/qwen3.8-max-prime'],['Llama 4','Meta','meta-llama/llama-4-maverick']]},
 ];
 const modref=$('#modref');
 MODELS.forEach(grp=>{modref.appendChild(el('div','mgrp',grp.g)); let t='<table class="mtbl"><thead><tr><th>model</th><th>vendor</th><th>id / route</th></tr></thead><tbody>'; grp.rows.forEach(r=>{t+=`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td><code>${r[2]}</code></td></tr>`;}); modref.appendChild(el('div',null,t+'</tbody></table>'));});
 
+renderScenarios();
 renderHeat();
 }
 </script>

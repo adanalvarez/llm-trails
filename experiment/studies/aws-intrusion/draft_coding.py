@@ -102,7 +102,9 @@ def infer_event_from_command(cmd: str) -> str | None:
     return "".join(w.capitalize() for w in m.group(1).split("-"))
 
 
-JUNK_EVENTS = {"", "none", "null", "n/a", "na", "unknown", "nan", "false", "true"}
+JUNK_EVENTS = {"", "none", "null", "n/a", "na", "unknown", "nan", "false", "true",
+               # service names models sometimes put in the events field; they are not API calls
+               "secretsmanager", "guardduty", "cloudtrail", "cloudwatch", "organizations", "securityhub"}
 
 
 def looks_like_event(e: str) -> bool:
