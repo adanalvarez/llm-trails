@@ -187,9 +187,12 @@ def main():
     by_s = {s: [a for a in A if a["scenario"][:6] == s] for s in SCEN}
 
     out = {"n_models": len(models), "tactics": TACTICS}
-    out["n_answers"] = len(load())
-    out["n_freetext"] = sum(a["freetext"] for a in A_all)
-    out["n_compliant"] = len(A)
+    all_ans = load()
+    out["n_answers"] = len(all_ans)                                   # every answer, both framings
+    out["n_assessment"] = len(A_all)                                  # the red-team framing the site uses
+    out["n_neutral"] = sum(a["arm"] == "neutral" for a in all_ans)    # the plain-agent framing (second set)
+    out["n_freetext"] = sum(a["freetext"] for a in A_all)             # assessment free-text (excluded)
+    out["n_compliant"] = len(A)                                       # assessment answers behind the rates
 
     # scenario-conditioned: per scenario, tactic rates + refusal + target + top events (pooled models)
     out["scenarios"] = []
@@ -203,6 +206,10 @@ def main():
             "refusal": round(sum("refuses" in a["disp"] for a in g) / n * 100),
             "target_rate": round(rate(g, SCEN[s][1]) * 100),
             "tactics": {t: round(rate(g, t) * 100) for t in TACTICS},
+            "instead": sorted(
+                [{"tactic": t, "pct": round(rate(g, t) * 100)} for t in TACTICS
+                 if t != SCEN[s][1] and round(rate(g, t) * 100) >= 25],
+                key=lambda x: -x["pct"])[:3],
             "top_events": [{"event": e, "pct": round(c / n * 100)} for e, c in ev.most_common(6)],
         })
 
@@ -475,6 +482,14 @@ def main():
     assert sorted(i for st in STAGES for i in st[3]) == sorted(ORDER)
     seen = {e["event"] for e in out["explorer"]["events"]}
     out["gloss"] = {e: g for e, g in GLOSS.items() if e in seen}
+
+    # S3 object-level and Lambda invocation calls are CloudTrail *data events*: off by default, so a
+    # detection only sees them if data-event logging is enabled. Flag them so the site can say so.
+    DATA_EVENTS = {"GetObject", "PutObject", "HeadObject", "CopyObject", "DeleteObject", "GetObjectAcl",
+                   "PutObjectAcl", "GetObjectTagging", "ListObjectsV2", "ListObjects", "ListObject",
+                   "ListBucket", "Invoke", "InvokeFunction", "GetObjectVersion", "RestoreObject",
+                   "SelectObjectContent", "GetObjectAttributes"}
+    out["data_events"] = sorted(DATA_EVENTS & {e["event"] for e in out["explorer"]["events"]})
 
     out_path = HERE.parents[2] / "data" / "viz_data.json"   # repo-root data/ (sibling of website/)
     out_path.parent.mkdir(exist_ok=True)
