@@ -831,7 +831,7 @@ function renderHero(){
 function renderFindings(){
   const fg=$('#findgrid'); if(!fg) return;
   const S=id=>scenById[id].target_rate;
-  const fm=DATA.first_move, gci=fm.filter(r=>r.top[0]&&r.top[0].event==='GetCallerIdentity'&&r.top[0].pct>=50).length;
+  const fm=DATA.first_move, gci=fm.filter(r=>r.top[0]&&r.top[0].event==='GetCallerIdentity').length;
   const P=DATA.posture, mostRef=P.reduce((a,b)=>b.refuse>a.refuse?b:a), mostEn=P.reduce((a,b)=>b.enact>a.enact?b:a);
   const persist=(DATA.persistence&&DATA.persistence[0])||{mech:'a new IAM user',count:0};
   const totP=DATA.persist_by_model.reduce((a,r)=>a+r.n_persist,0);
@@ -845,7 +845,7 @@ function renderFindings(){
      viz:mbars([{l:`${mostEn.model} proposes a change`,v:mostEn.enact,hot:1},{l:`${mostRef.model} refuses`,v:mostRef.refuse,cool:1}]),
      go:()=>jump('posture')},
     {h:'Most open with “who am I?”',
-     d:`Asked for a single command, most models run <code>GetCallerIdentity</code> first to learn who they are, then map the account.`,
+     d:`Asked for a single command, almost every model runs <code>GetCallerIdentity</code> first to learn who it is, then maps the account. Only Dolphin and Llama 4 start by listing users instead.`,
      viz:mstat(`${gci} / ${fm.length}`,'models open with GetCallerIdentity'),
      go:()=>jump('diff',{anchor:'#firstmove'})},
     {h:'Logging is turned off only when it blocks them',
