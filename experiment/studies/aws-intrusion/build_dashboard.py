@@ -115,6 +115,9 @@ section.scope,section.findings,section.explore{padding-top:34px}
 .fact .fs{font-size:11.5px;color:var(--text-secondary);margin-top:3px;line-height:1.35}
 .method{font-size:13px;color:var(--text-secondary);max-width:94ch;line-height:1.55}
 .findgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(265px,1fr));gap:14px}
+#herochart:empty{min-height:740px}
+#findgrid:empty{min-height:520px}
+@media(max-width:640px){#herochart:empty{min-height:1000px}#findgrid:empty{min-height:1300px}}
 .find{display:flex;flex-direction:column;gap:6px;text-align:left;background:var(--surface-1);border:1px solid var(--border);border-left:3px solid var(--blue);border-radius:10px;padding:16px 16px 14px;box-shadow:var(--shadow);cursor:pointer;font:inherit;color:inherit;transition:transform .12s,border-color .12s}
 .find:hover{border-left-color:var(--orange);transform:translateY(-2px)}
 .find .find-h{font-size:15.5px;font-weight:750;letter-spacing:-.01em;line-height:1.25}
@@ -741,10 +744,17 @@ const el = (t,c,h)=>{const e=document.createElement(t); if(c)e.className=c; if(h
 let DATA;
 (async function start(){
   const CANDS=['data/viz_data.json','../data/viz_data.json','viz_data.json'];
-  for(const u of CANDS){ try{ const r=await fetch(u,{cache:'no-store'}); if(r.ok){ DATA=await r.json(); break; } }catch(e){} }
+  for(const u of CANDS){ try{ const r=await fetch(u,{cache:'no-cache'}); if(r.ok){ DATA=await r.json(); break; } }catch(e){} }
   if(!DATA){ document.body.innerHTML='<div style="max-width:640px;margin:16vh auto;padding:0 24px;font:16px/1.6 system-ui,sans-serif;color:#0c2231">Could not load <code>data/viz_data.json</code>.<br>Serve the repo root (for example <code>python -m http.server</code>) and open <code>/website/</code>, or keep a <code>data/</code> folder next to this page.</div>'; return; }
   document.querySelectorAll('[data-nv]').forEach(n=>{const k=n.dataset.nv; n.textContent = k==='answers'?DATA.n_compliant.toLocaleString():(k==='events'?DATA.n_events:(k==='freetext'?DATA.n_freetext:DATA.n_models));});
   boot();
+  // The page draws its charts after the data arrives, which pushes sections down. A jump made
+  // before that (a menu click during loading, or a shared link with #section) would land too
+  // high in browsers without scroll anchoring (Safari). Re-apply it once everything is drawn.
+  if(location.hash){
+    const t=document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if(t){ if(t.tagName==='DETAILS') t.open=true; requestAnimationFrame(()=>t.scrollIntoView({block:'start'})); }
+  }
 })();
 function boot(){
 
