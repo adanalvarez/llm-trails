@@ -750,10 +750,20 @@ try{const s=localStorage.getItem('awsbr-theme'); if(s)root.setAttribute('data-th
 
 /* sticky nav: highlight the section in view; [data-jump] links open an Explore tab */
 const navLinks=[...document.querySelectorAll('.tn-links a')];
-if('IntersectionObserver' in window){
-  const io=new IntersectionObserver(es=>es.forEach(en=>{ if(en.isIntersecting) navLinks.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+en.target.id)); }),{rootMargin:'-40% 0px -55% 0px'});
-  ['results','findings','defend','how','explore-top'].forEach(id=>{const n=document.getElementById(id); if(n)io.observe(n);});
+// Deterministic scroll-spy: the active item is the last section whose top has passed just under
+// the sticky bar. (An IntersectionObserver only reports changes, in browser-dependent order, so after
+// a menu jump it could leave the wrong item lit.)
+const spyIds=['results','findings','defend','how','explore-top'];
+function spy(){
+  const line=(document.querySelector('.topnav')||{offsetHeight:52}).offsetHeight+30; let cur=null;
+  for(const id of spyIds){ const n=document.getElementById(id); if(n && n.getBoundingClientRect().top<=line) cur=id; }
+  if(innerHeight+scrollY>=document.documentElement.scrollHeight-2) cur=spyIds[spyIds.length-1];
+  navLinks.forEach(a=>a.classList.toggle('on', !!cur && a.getAttribute('href')==='#'+cur));
 }
+addEventListener('scroll',spy,{passive:true});   // 5 rect reads per event: cheap enough to run directly
+addEventListener('resize',spy);
+navLinks.forEach(a=>a.addEventListener('click',()=>navLinks.forEach(b=>b.classList.toggle('on',b===a))));
+spy();
 document.addEventListener('click',e=>{const a=e.target.closest('[data-jump]'); if(!a)return; e.preventDefault(); jump(a.dataset.jump);});
 const termsEl=$('#terms'); if(termsEl && matchMedia('(min-width:720px)').matches) termsEl.open=true;
 const G=DATA.gloss||{};
