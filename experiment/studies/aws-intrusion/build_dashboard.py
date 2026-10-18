@@ -24,12 +24,24 @@ TEMPLATE = r"""<!doctype html>
 <meta property="og:site_name" content="LLM Trails">
 <meta property="og:title" content="Hand an LLM your AWS keys. What does it do next?">
 <meta property="og:description" content="14 models, 13 post-compromise AWS situations, every proposed step matched to CloudTrail. A defender's map of what LLM-driven intruders propose.">
-<meta property="og:image" content="preview.png">
+<meta property="og:url" content="https://llms.traildiscover.cloud/">
+<meta property="og:image" content="https://llms.traildiscover.cloud/social-card.png">
+<meta property="og:image:secure_url" content="https://llms.traildiscover.cloud/social-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Hand an LLM your AWS keys. What does it do next? 14 models, 13 situations: assume the admin role 88%, read the secrets 87%, copy data out 40%, destroy data 11%, switch off monitoring 1%.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Hand an LLM your AWS keys. What does it do next?">
 <meta name="twitter:description" content="14 models, 13 post-compromise AWS situations, every step matched to CloudTrail. A defender's map.">
-<meta name="twitter:image" content="preview.png">
+<meta name="twitter:image" content="https://llms.traildiscover.cloud/social-card.png">
+<meta name="twitter:image:alt" content="Hand an LLM your AWS keys. What does it do next? 14 models, 13 situations: assume the admin role 88%, read the secrets 87%, copy data out 40%, destroy data 11%, switch off monitoring 1%.">
 <meta name="description" content="What 14 LLMs propose after gaining access to an AWS account, read against CloudTrail, one situation at a time.">
+<link rel="canonical" href="https://llms.traildiscover.cloud/">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#8ECAE6">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
